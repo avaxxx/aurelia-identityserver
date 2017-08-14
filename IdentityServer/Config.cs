@@ -66,7 +66,7 @@ namespace AuAuth.IdentityServer
                     ClientName = "MVC Client",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
-                    RequireConsent = true,
+                    RequireConsent = false,
 
                     ClientSecrets = 
                     {
