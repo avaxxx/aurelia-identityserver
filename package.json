@@ -2,6 +2,7 @@
   "name": "WebApplicationBasic",
   "version": "0.0.0",
   "dependencies": {
+    "aurelia-authentication": "^3.7.0",
     "aurelia-bootstrapper": "^2.0.1",
     "aurelia-fetch-client": "^1.0.1",
     "aurelia-framework": "^1.1.0",
@@ -27,5 +28,12 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
     "webpack-hot-middleware": "^2.18.0"
+  },
+  "aurelia": {
+    "build": {
+      "resources": [
+        "aurelia-auth/authFilterValueConverter"
+      ]
+    }
   }
 }

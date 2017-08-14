@@ -17,6 +17,7 @@ namespace AuAuth.IdentityServer
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResources.Email()
             };
         }
 
@@ -83,6 +84,26 @@ namespace AuAuth.IdentityServer
                         "api1"
                     },
                     AllowOfflineAccess = true
+                },
+                 // JavaScript Client
+                new Client
+                {
+                    ClientId = "aurelia-openiddict",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
+
+                    RedirectUris = { "http://localhost:5000/#home" },
+                    PostLogoutRedirectUris = { "http://localhost:5000#counter" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api1"
+                    },
                 }
             };
         }
