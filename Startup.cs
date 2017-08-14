@@ -2,12 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AuAuth.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using AuAuth.Database.Entities;
+using AuAuth.IdentityServer.Services;
+using AuAuth.IdentityServer;
 
 namespace WebApplicationBasic
 {
@@ -28,8 +34,26 @@ namespace WebApplicationBasic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+             // Add framework services.
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
+
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryPersistedGrants()
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryClients(Config.GetClients())
+                .AddAspNetIdentity<User>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +76,18 @@ namespace WebApplicationBasic
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
+            app.UseIdentityServer();
+
+            // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                AuthenticationScheme = "Google",
+                SignInScheme = "Identity.External", // this is the name of the cookie middleware registered by UseIdentity()
+                ClientId = "998042782978-s07498t8i8jas7npj4crve1skpromf37.apps.googleusercontent.com",
+                ClientSecret = "HsnwJri_53zn7VcO1Fm7THBb",
+            });
 
             app.UseMvc(routes =>
             {
