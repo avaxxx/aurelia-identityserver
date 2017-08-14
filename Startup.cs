@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using AuAuth.Database.Entities;
 using AuAuth.IdentityServer.Services;
 using AuAuth.IdentityServer;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace WebApplicationBasic
 {
@@ -59,6 +60,8 @@ namespace WebApplicationBasic
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -72,7 +75,7 @@ namespace WebApplicationBasic
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+               // app.UseDeveloperExceptionPage();
             }
 
             app.UseStaticFiles();
@@ -89,6 +92,29 @@ namespace WebApplicationBasic
                 ClientSecret = "HsnwJri_53zn7VcO1Fm7THBb",
             });
 
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies"
+            });
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = "oidc",
+                SignInScheme = "Cookies",
+
+                Authority = "http://localhost:5000",
+                RequireHttpsMetadata = false,
+
+                ClientId = "mvc",
+                ClientSecret = "secret",
+
+                ResponseType = "code id_token",
+                Scope = { "api1", "offline_access" },
+
+                GetClaimsFromUserInfoEndpoint = true,
+                SaveTokens = true
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

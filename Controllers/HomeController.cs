@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuAuth.Controllers
@@ -16,6 +17,12 @@ namespace AuAuth.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        [Authorize]
+        public ActionResult TestAuth()
+        {
+            return Json("Look at me");
         }
     }
 }
