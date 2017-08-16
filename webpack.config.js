@@ -33,8 +33,12 @@ module.exports = (env) => {
             }),
             new AureliaPlugin({ aureliaApp: 'boot' }),
             new ModuleDependenciesPlugin({
-                "aurelia-authentication": ["./authFilterValueConverter"]
-              }),
+                "aurelia-authentication": ["./authFilterValueConverter"],
+                "aurelia-open-id-connect": [
+                    "./open-id-connect-user-block",
+                    "./open-id-connect-role-filter"
+                ]
+              })
         ].concat(isDevBuild ? [
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps

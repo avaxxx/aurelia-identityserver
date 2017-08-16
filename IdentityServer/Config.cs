@@ -94,8 +94,8 @@ namespace AuAuth.IdentityServer
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
 
-                    RedirectUris = { "http://localhost:5000/#home" },
-                    PostLogoutRedirectUris = { "http://localhost:5000#counter" },
+                    RedirectUris = { "http://localhost:5000/singin-success" },
+                    PostLogoutRedirectUris = { "http://localhost:5000/singin-success" },
 
                     AllowedScopes =
                     {

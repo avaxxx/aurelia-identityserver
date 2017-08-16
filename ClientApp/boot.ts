@@ -4,13 +4,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during the build
 import authConfig from './AuthConfig';
+import oidcConfig from "./open-id-connect-configuration";
 
 
 export function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration()
-    .plugin(PLATFORM.moduleName('aurelia-authentication'), baseConfig => {
-        baseConfig.configure(authConfig);
-    });
+    .plugin(PLATFORM.moduleName("aurelia-open-id-connect"), (callback) => callback(oidcConfig));
+    // .plugin(PLATFORM.moduleName('aurelia-authentication'), baseConfig => {
+    //     baseConfig.configure(authConfig);
+    // });
 
     if (IS_DEV_BUILD) {
         aurelia.use.developmentLogging();
