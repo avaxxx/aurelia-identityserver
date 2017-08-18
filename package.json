@@ -10,6 +10,7 @@
     "aurelia-open-id-connect": "^0.13.0",
     "aurelia-pal": "^1.3.0",
     "aurelia-router": "^1.2.1",
+    "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1"

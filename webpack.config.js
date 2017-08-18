@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const  webpack = require('webpack');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const bundleOutputDir = './wwwroot/dist';
 
@@ -31,6 +31,12 @@ module.exports = (env) => {
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
             }),
+            new webpack.ProvidePlugin({
+                'Promise': 'bluebird',
+                '$': 'jquery',
+                'jQuery': 'jquery',
+                'window.jQuery': 'jquery',
+              }),
             new AureliaPlugin({ aureliaApp: 'boot' }),
             new ModuleDependenciesPlugin({
                 "aurelia-authentication": ["./authFilterValueConverter"],

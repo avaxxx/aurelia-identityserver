@@ -5,6 +5,10 @@ import 'bootstrap';
 declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during the build
 import authConfig from './AuthConfig';
 import oidcConfig from "./open-id-connect-configuration";
+import * as Bluebird from 'bluebird';
+
+
+Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false });
 
 
 export function configure(aurelia: Aurelia) {
