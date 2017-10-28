@@ -15,6 +15,7 @@ using AuAuth.Database.Entities;
 using AuAuth.IdentityServer.UI;
 using AuAuth.IdentityServer.Services;
 using AuAuth.IdentityServer.Models.AccountViewModels;
+using Microsoft.AspNetCore.Authentication;
 
 namespace AuAuth.Controllers
 {
@@ -139,8 +140,8 @@ namespace AuAuth.Controllers
                 try
                 {
                     // hack: try/catch to handle social providers that throw
-                    await HttpContext.Authentication.SignOutAsync(vm.ExternalAuthenticationScheme,
-                        new AuthenticationProperties { RedirectUri = url });
+                    await HttpContext.SignOutAsync(vm.ExternalAuthenticationScheme,
+                        new Microsoft.AspNetCore.Authentication.AuthenticationProperties { RedirectUri = url });
                 }
                 catch (NotSupportedException) // this is for the external providers that don't have signout
                 {
