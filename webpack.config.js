@@ -42,7 +42,8 @@ module.exports = (env) => {
                 "aurelia-authentication": ["./authFilterValueConverter"],
                 "aurelia-open-id-connect": [
                     "./open-id-connect-user-block",
-                    "./open-id-connect-role-filter"
+                    "./open-id-connect-role-filter",
+                    "./open-id-connect-user-debug"
                 ]
               })
         ].concat(isDevBuild ? [
