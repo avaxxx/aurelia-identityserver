@@ -6,6 +6,7 @@ declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during 
 import authConfig from './AuthConfig';
 import oidcConfig from "./open-id-connect-configuration";
 import * as Bluebird from 'bluebird';
+import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 
 
 Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false });
@@ -13,7 +14,12 @@ Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false 
 
 export function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration()
-    .plugin(PLATFORM.moduleName("aurelia-open-id-connect"), (callback) => callback(oidcConfig));
+    .plugin(PLATFORM.moduleName("aurelia-open-id-connect"),  
+    (config: OpenIdConnectConfiguration) => {
+        config.userManagerSettings = oidcConfig.userManagerSettings;
+        config.loginRedirectModuleId = oidcConfig.loginRedirectModuleId;
+        config.logoutRedirectModuleId = oidcConfig.logoutRedirectModuleId;
+      });
     // .plugin(PLATFORM.moduleName('aurelia-authentication'), baseConfig => {
     //     baseConfig.configure(authConfig);
     // });

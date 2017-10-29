@@ -7,7 +7,7 @@ const appHost = "http://localhost:5000";
 export default {
   loginRedirectModuleId: "login",
   logoutRedirectModuleId: "login",
-  userManagerSettings: <UserManagerSettings>{
+  userManagerSettings: {
     // The number of seconds in advance of access token expiry
     // to raise the access token expiring event.
     accessTokenExpiringNotificationTime: 1,
@@ -36,5 +36,5 @@ export default {
       prefix: "oidc",
       store: window.localStorage,
     }),
-  },
+  } as UserManagerSettings,
 } as OpenIdConnectConfiguration;
