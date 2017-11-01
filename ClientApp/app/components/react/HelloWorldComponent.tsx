@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as DOM from 'react-dom';
-import * as Select from 'react-select';
+import  Select from 'react-select';
 import "../../../../node_modules/react-select/dist/react-select.css"
 
 class ToggleState {
