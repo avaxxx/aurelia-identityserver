@@ -63,7 +63,21 @@ export class App {
             moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
             nav: true,
             title: 'Fetch data'
-        }, {
+        },{
+            route: 'kendo',
+            name: 'kendo',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('../kendo/kendo'),
+            nav: true,
+            title: 'Kendo demo'
+        },{
+            route: 'react',
+            name: 'react',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('../react/react'),
+            nav: true,
+            title: 'React demo'
+        },{
             route: 'login',
             name: 'login',
             settings: { icon: 'th-list' },

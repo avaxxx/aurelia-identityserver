@@ -14,6 +14,7 @@ Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false 
 
 export function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration()
+    .plugin(PLATFORM.moduleName('aurelia-kendoui-bridge'))
     .plugin(PLATFORM.moduleName("aurelia-open-id-connect"),  
     (config: OpenIdConnectConfiguration) => {
         config.userManagerSettings = oidcConfig.userManagerSettings;

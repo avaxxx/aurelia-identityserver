@@ -7,8 +7,9 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es2015", "dom" ],
-    "types": [ "node" ]
+    "types": [ "node", "@types/kendo-ui"  ],
+    "jsx": "react"
   },
-  "exclude": [ "bin", "node_modules" ],
-  "atom": { "rewriteTsconfig": false }
+  "exclude": [ "bin", "node_modules" ]
+  // "atom": { "rewriteTsconfig": false }
 }

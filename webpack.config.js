@@ -1,6 +1,7 @@
 const path = require('path');
 const  webpack = require('webpack');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const bundleOutputDir = './wwwroot/dist';
 
 module.exports = (env) => {
@@ -9,8 +10,8 @@ module.exports = (env) => {
         stats: { modules: false },
         entry: { 'app': 'aurelia-bootstrapper' },
         resolve: {
-            extensions: ['.ts', '.js'],
-            modules: ['ClientApp', 'node_modules'],
+            extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            modules: ['ClientApp', 'node_modules', 'kendo/js'],
         },
         output: {
             path: path.resolve(bundleOutputDir),
@@ -19,13 +20,14 @@ module.exports = (env) => {
         },
         module: {
             rules: [
-                { test: /\.ts$/i, include: /ClientApp/, use: 'ts-loader?silent=true' },
+                { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.html$/i, use: 'html-loader' },
                 { test: /\.css$/i, use: isDevBuild ? 'css-loader' : 'css-loader?minimize' },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
             ]
         },
         plugins: [
+            new CheckerPlugin(),            
             new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,

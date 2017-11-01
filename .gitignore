@@ -30,6 +30,7 @@ Obj/
 .vs/
 /wwwroot/dist/
 /ClientApp/dist/
+/kendo
 
 /yarn.lock
 
