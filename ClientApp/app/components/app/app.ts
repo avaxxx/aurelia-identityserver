@@ -84,7 +84,7 @@ export class App {
                 if (this.isSilentLogin()) {
                     return this.openIdConnectNavigationStrategies.silentSignICallback(instruction);
                 } else {
-                    return this.openIdConnectNavigationStrategies.signInRedirectCallback(instruction);
+                    return this.openIdConnectNavigationStrategies.signInRedirectCallback(instruction, router);
                 }
             },
             //route: this.getPath(OpenIdConnectConfiguration.userManagerSettings.redirect_uri),

@@ -10,12 +10,11 @@ export default class NavigationStrategies {
 
     constructor(
         private openIdConnectConfiguration: OpenIdConnectConfiguration,
-        private userManager: UserManager,
-        private router: Router) 
+        private userManager: UserManager) 
         { }
 
-    public signInRedirectCallback(instruction: NavigationInstruction): Promise<any> {
-
+    public signInRedirectCallback(instruction: NavigationInstruction, router:Router): Promise<any> {
+        
         console.log('navigationstrategies')
         let callbackHandler: Function = () => {
             return this.userManager.getUser().then((user) => {
@@ -31,9 +30,9 @@ export default class NavigationStrategies {
         };
 
         let postCallbackRedirect: Function = () => {
-            this.router.navigate('home');
+         router.navigateToRoute('home');
             
-            //instruction.config.moduleId = this.openIdConnectConfiguration.loginRedirectModuleId;
+            // instruction.config.moduleId = this.openIdConnectConfiguration.loginRedirectModuleId;
         };
 
         return this.runHandlers(callbackHandler, postCallbackRedirect);
@@ -58,14 +57,14 @@ export default class NavigationStrategies {
         return this.runHandlers(callbackHandler, postCallbackRedirect);
     }
 
-    public signoutRedirectCallback(instruction: NavigationInstruction): Promise<any> {
+    public signoutRedirectCallback(instruction: NavigationInstruction, router:Router): Promise<any> {
         let callbackHandler: Function = () => {
             let args: any = {};
             return this.userManager.signoutRedirectCallback(args);
         };
 
         let postCallbackRedirect: Function = () => {
-            this.router.navigate('home');
+            router.navigate('home');
             // instruction.config.moduleId = this.openIdConnectConfiguration.logoutRedirectModuleId;
         };
 
