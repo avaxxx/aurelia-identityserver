@@ -5,12 +5,12 @@ import { autoinject } from "aurelia-framework";
 
 @autoinject
 export class Counter {
-    constructor(private openIdConnect: OpenIdConnect) { }
 
     public currentCount = 0;
 
     public incrementCounter() {
-        this.openIdConnect.login();
+        this.currentCount++;
+        
         // var config = {
         //     authority: "http://localhost:5000",
         //     client_id: "aurelia-openiddict",
@@ -24,3 +24,4 @@ export class Counter {
         // mgr.signinRedirect();
     }
 }
+

@@ -1,21 +1,16 @@
-import {AuthService} from 'aurelia-authentication';
-import {inject} from 'aurelia-framework';
+import {OpenIdConnect} from 'aurelia-open-id-connect';
+import { autoinject, customElement } from "aurelia-framework";
 
-@inject(AuthService )
 
+@autoinject
 export class Login{
-    auth:AuthService;
-	constructor(auth){
-		this.auth = auth;
-	};
+    constructor(private openIdConnect: OpenIdConnect) { }
+	
 
 	heading = 'Login';
 		
-	authenticate(name){
-		return this.auth.authenticate('openiddict', '/#')
-		.then((response)=>{
-			console.log("auth response " + response);
-		});
+	authenticate(){
+		this.openIdConnect.login();
 
 	}
 }

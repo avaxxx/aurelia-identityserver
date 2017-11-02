@@ -52,10 +52,10 @@ export class App {
         }, {
             route: 'counter',
             name: 'counter',
-            settings: { icon: 'education' },
+            settings: { icon: 'education',roles: [OpenIdConnectRoles.Authorized] },
             moduleId: PLATFORM.moduleName('../counter/counter'),
             nav: true,
-            title: 'Counter'
+            title: 'Counter',
         }, {
             route: 'fetch-data',
             name: 'fetchdata',
