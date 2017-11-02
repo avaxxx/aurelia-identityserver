@@ -77,6 +77,14 @@ export class App {
             moduleId: PLATFORM.moduleName('../react/react'),
             nav: true,
             title: 'React demo'
+        },
+        {
+            route: 'materialise',
+            name: 'materialise',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('../materialise/materialise'),
+            nav: true,
+            title: 'Materialise demo'
         },{
             route: 'login',
             name: 'login',
