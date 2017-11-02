@@ -34,7 +34,8 @@ module.exports = ({ prod } = {}) => {
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'jquery',
-                'aurelia-authentication'
+                'aurelia-authentication',
+                'aurelia-kendoui-bridge'
             ],
         },
         output: {

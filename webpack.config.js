@@ -23,7 +23,13 @@ module.exports = (env) => {
                 { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.html$/i, use: 'html-loader' },
                 { test: /\.css$/i, use: isDevBuild ? 'css-loader' : 'css-loader?minimize' },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+                {
+                    test: /\.css$/i,
+                    loader: ['style-loader', 'css-loader'],
+                    issuer: /\.[tj]s$/i
+                },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
+                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, loader: 'url-loader?limit=100000' }
             ]
         },
         plugins: [

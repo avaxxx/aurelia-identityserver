@@ -2,7 +2,7 @@ import '../../../../kendo/js/kendo.dropdownlist.min';
 // import '@types/kendo-ui'
 
 
-export class Kendokendo {
+export class Kendo {
   private dataSource : kendo.data.DataSource;
 
   constructor(){
