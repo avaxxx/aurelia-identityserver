@@ -24,7 +24,8 @@ namespace AuAuth.IdentityServer
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResources.Email()
+                new IdentityResources.Email(),
+                new IdentityResource("UserId", "User Id", new List<string>(){"UserId"})
             };
         }
 
@@ -82,6 +83,7 @@ namespace AuAuth.IdentityServer
                     {
                         new Secret("secret".Sha256())
                     },
+                    AlwaysIncludeUserClaimsInIdToken = true, 
 
                     RedirectUris = { "http://localhost:5000/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5000/signout-callback-oidc" },
@@ -102,6 +104,7 @@ namespace AuAuth.IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
+                    AlwaysIncludeUserClaimsInIdToken = true, 
 
                     RedirectUris = { "http://localhost:5000/singin-success" },
                     PostLogoutRedirectUris = { "http://localhost:5000/singin-success" },
@@ -111,7 +114,8 @@ namespace AuAuth.IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api1"
+                        "api1",
+                        "UserId"
                     },
                 }
             };
@@ -142,7 +146,7 @@ namespace AuAuth.IdentityServer
             var claims = principal.Claims.ToList();
 
             //Add more claims like this
-            claims.Add(new System.Security.Claims.Claim("MyProfileID", user.Id));
+            claims.Add(new System.Security.Claims.Claim("UserId", user.Id));
 
             context.IssuedClaims = claims;
         }

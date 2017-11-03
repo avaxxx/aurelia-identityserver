@@ -84,6 +84,7 @@ namespace AuAuth.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberLogin, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(model.ReturnUrl);
                 }
