@@ -1,17 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AuAuth.dll",
-            "args": [],
-            "cwd": "${workspaceRoot}",
-            "stopAtEntry": false,
-            "console": "internalConsole"
-        },
+
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -43,10 +33,27 @@
             }
         },
         {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
+            "type": "chrome",
+            "request": "launch",
+            "name": "LaunchChrome",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/wwwroot/dist"
+        },
+        {
+            // This one in case you manually start 2 debug sessions.
+            // Like first .net core 
+            // then attach to the browser that was started.
+            "type": "chrome",
             "request": "attach",
-            "processId": "${command:pickProcess}"
+            "name": "AttachChrome",
+            "port": 9222,
+            "webRoot": "${workspaceRoot}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Debug All",
+            "configurations": [".NET Core Launch (web)", "LaunchChrome"]
         }
     ]
 }
