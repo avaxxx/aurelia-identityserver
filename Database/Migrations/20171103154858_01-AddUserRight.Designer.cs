@@ -12,9 +12,10 @@ using System;
 namespace AuAuth.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171103154858_01-AddUserRight")]
+    partial class _01AddUserRight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

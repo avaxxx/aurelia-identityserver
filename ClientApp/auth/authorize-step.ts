@@ -20,6 +20,10 @@ export default class OpenIdConnectAuthorizeStep {
 
             if (this.requiresRole(navigationInstruction, OpenIdConnectRoles.Administrator)) {
                 // todo: Check for admin role.
+                if (user === null || user.profile.UserRight !== "SuperAdmin")
+                {
+                    return next.cancel(new Redirect("login"));
+                }
             }
 
             return next();

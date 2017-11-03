@@ -7,7 +7,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace AuAuth.Database.Entities
 {
+    public enum UserRightEnum
+    {
+        User = 1,
+        Admin = 2,
+        SuperAdmin = 3
+    }
     public class User : IdentityUser
     {
+        public UserRightEnum UserRight { get; set; }
     }
 }

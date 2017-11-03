@@ -59,7 +59,7 @@ export class App {
         }, {
             route: 'fetch-data',
             name: 'fetchdata',
-            settings: { icon: 'th-list' },
+            settings: { icon: 'th-list',roles: [OpenIdConnectRoles.Administrator] },
             moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
             nav: true,
             title: 'Fetch data'
@@ -85,14 +85,28 @@ export class App {
             moduleId: PLATFORM.moduleName('../materialise/materialise'),
             nav: true,
             title: 'Materialise demo'
-        },{
-            route: 'login',
-            name: 'login',
-            settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../login/login'),
-            nav: false,
-            title: 'login'
         },
+        {
+            name: "login",
+            nav: false,
+            navigationStrategy: (instruction) => {
+                instruction.config.href = instruction.fragment;
+                instruction.config.moduleId = instruction.fragment;
+                instruction.config.redirect = instruction.fragment;
+                this.openIdConnect.login();
+            },
+            route: "login",
+            settings: {
+                roles: [OpenIdConnectRoles.Anonymous]
+            },
+            },
+        //     route: 'login',
+        //     name: 'login',
+        //     settings: { icon: 'th-list' },
+        //     moduleId: PLATFORM.moduleName('../login/login'),
+        //     nav: false,
+        //     title: 'login'
+        // },
         // {
         //     name: "logInRedirectCallback",
         //     nav: false,

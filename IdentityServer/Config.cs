@@ -25,7 +25,7 @@ namespace AuAuth.IdentityServer
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource("UserId", "User Id", new List<string>(){"UserId"})
+                new IdentityResource("UserRight", "User Right", new List<string>(){"UserRight"})
             };
         }
 
@@ -115,7 +115,7 @@ namespace AuAuth.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         "api1",
-                        "UserId"
+                        "UserRight"
                     },
                 }
             };
@@ -146,7 +146,7 @@ namespace AuAuth.IdentityServer
             var claims = principal.Claims.ToList();
 
             //Add more claims like this
-            claims.Add(new System.Security.Claims.Claim("UserId", user.Id));
+            claims.Add(new System.Security.Claims.Claim("UserRight", user.UserRight.ToString()));
 
             context.IssuedClaims = claims;
         }
