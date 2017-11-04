@@ -1,15 +1,17 @@
 <template>
-    <require from="aurelia-kendoui-bridge/dropdownlist/dropdownlist"></require>
-  
-    <div id="example">
-      <div class="demo-section k-content">
-        <h4>Products</h4>
-        <ak-drop-down-list k-data-text-field="ProductName"
-                          k-data-value-field="ProductID"
-                          k-data-source.bind="dataSource"
-                          k-on-change.delegate="onChange()"  
-                          style="width: 100%">
-        </ak-drop-down-list>
+    <div slot="main-content">
+      <require from="aurelia-kendoui-bridge/dropdownlist/dropdownlist"></require>
+    
+      <div id="example">
+        <div class="demo-section k-content">
+          <h4>Products</h4>
+          <ak-drop-down-list k-data-text-field="ProductName"
+                            k-data-value-field="ProductID"
+                            k-data-source.bind="dataSource"
+                            k-on-change.delegate="onChange()"  
+                            style="width: 100%">
+          </ak-drop-down-list>
+        </div>
       </div>
     </div>
   </template>

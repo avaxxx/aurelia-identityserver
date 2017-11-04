@@ -2,9 +2,9 @@ import { Aurelia, PLATFORM, autoinject } from 'aurelia-framework';
 import { Router, RouterConfiguration, NavigationInstruction  } from 'aurelia-router';
 import {AuthenticateStep} from 'aurelia-authentication';
 import { UserManager, Log } from 'oidc-client'
-import NavigationStrategies from '../../../auth/navigation-strategies'
-import OpenIdConnectAuthorizeStep from '../../../auth/authorize-step'
-import OpenIdConnectConfiguration from '../../../open-id-connect-configuration'
+import NavigationStrategies from './auth/navigation-strategies'
+import OpenIdConnectAuthorizeStep from './auth/authorize-step'
+import OpenIdConnectConfiguration from './open-id-connect-configuration'
 import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
 
 @autoinject
@@ -39,53 +39,80 @@ export class App {
         
         config.addPipelineStep("authorize", OpenIdConnectAuthorizeStep);
 
+        const { attributes } = require("aurelia-webpack-plugin/dist/html-requires-loader");
+        attributes["router-view"] = [ "layout-view", "layout-view-model" ];
+
         // config.addPipelineStep('authorize', AuthenticateStep); // Add a route filter so only authenticated uses are authorized to access some routes
         
-
         config.map([{
             route: [ '', 'home' ],
             name: 'home',
             settings: { icon: 'home' },
-            moduleId: PLATFORM.moduleName('../home/home'),
+            moduleId: PLATFORM.moduleName('./app/components/home/home'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Home'
         }, {
             route: 'counter',
             name: 'counter',
             settings: { icon: 'education',roles: [OpenIdConnectRoles.Authorized] },
-            moduleId: PLATFORM.moduleName('../counter/counter'),
+            moduleId: PLATFORM.moduleName('./app/components/counter/counter'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Counter',
         }, {
             route: 'fetch-data',
             name: 'fetchdata',
             settings: { icon: 'th-list',roles: [OpenIdConnectRoles.Administrator] },
-            moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
+            moduleId: PLATFORM.moduleName('./app/components/fetchdata/fetchdata'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Fetch data'
         },{
             route: 'kendo',
             name: 'kendo',
             settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../kendo/kendo'),
+            moduleId: PLATFORM.moduleName('./app/components/kendo/kendo'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Kendo demo'
         },{
             route: 'react',
             name: 'react',
             settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../react/react'),
+            moduleId: PLATFORM.moduleName('./app/components/react/react'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'React demo'
         },
         {
             route: 'materialise',
             name: 'materialise',
             settings: { icon: 'th-list' },
-            moduleId: PLATFORM.moduleName('../materialise/materialise'),
+            moduleId: PLATFORM.moduleName('./app/components/materialise/materialise'),
             nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'),            
             title: 'Materialise demo'
         },
+        { 
+            route: 'test',      
+             name: 'test', 
+             nav: true,
+             settings: { icon: 'th-list' },             
+             moduleId: PLATFORM.moduleName('./app/components/test/test'), 
+            //  layoutView: PLATFORM.moduleName('layout'),
+             layoutViewModel: PLATFORM.moduleName('main-layout'),
+             title: 'Test layout'
+        },
+        { 
+            route: 'admin',      
+             name: 'admin', 
+             settings: { icon: 'th-list' },             
+             moduleId: PLATFORM.moduleName('./admin/components/main/main'), 
+            //  layoutView: PLATFORM.moduleName('layout'),
+             layoutViewModel: PLATFORM.moduleName('admin-layout'),
+             title: 'Admin layout'
+            },
         {
             name: "login",
             nav: false,

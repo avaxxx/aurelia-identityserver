@@ -7,11 +7,15 @@ const bundleOutputDir = './wwwroot/dist';
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
-        stats: { modules: false },
+        stats: { modules: true },
         entry: { 'app': 'aurelia-bootstrapper' },
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
             modules: ['ClientApp', 'node_modules', 'kendo/js'],
+            alias: {
+                //'admin': path.resolve('ClientApp/app/components/admin.html'),
+                // 'layout': path.resolve('ClientApp/app/app/layout.html'),
+                }
         },
         output: {
             path: path.resolve(bundleOutputDir),
