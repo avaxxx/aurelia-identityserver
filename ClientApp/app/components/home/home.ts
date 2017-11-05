@@ -1,7 +1,15 @@
+import { autoinject } from 'aurelia-framework';
+import { BaseViewModel } from './../../../BaseViewModel';
 import { UserManager } from 'oidc-client'
+import * as $ from "jquery"
 
-export class Home {
-    constructor(){
+@autoinject
+export class Home extends BaseViewModel {
+    constructor(userManager: UserManager){
+        super(userManager);
+
+
+        console.log('Hallo');
         // var config = {
         //     authority: "http://localhost:5000",
         //     client_id: "js",
@@ -27,5 +35,10 @@ export class Home {
         //     console.log(user);
         // });
         
+    }
+
+    attached() {
+        // $('#testUl').css('background-color', 'blue');    
+        console.log(this.user);    
     }
 }

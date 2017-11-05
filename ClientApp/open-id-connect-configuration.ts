@@ -26,8 +26,8 @@ export default {
     loadUserInfo: false,
     post_logout_redirect_uri: `${appHost}/counter`,
     redirect_uri: `${appHost}/singin-success`,
-    response_type: "id_token",
-    scope: "openid email UserRight",
+    response_type: "token id_token",
+    scope: "openid email UserRight api1",
     // number of millisecods to wait for the authorization
     // server to response to silent renew request
     silentRequestTimeout: 10000,

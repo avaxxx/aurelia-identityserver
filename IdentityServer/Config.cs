@@ -105,7 +105,7 @@ namespace AuAuth.IdentityServer
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     AlwaysIncludeUserClaimsInIdToken = true, 
-
+                    AllowOfflineAccess = true,
                     RedirectUris = { "http://localhost:5000/singin-success" },
                     PostLogoutRedirectUris = { "http://localhost:5000/singin-success" },
 

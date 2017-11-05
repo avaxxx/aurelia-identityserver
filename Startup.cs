@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using static IdentityServer4.IdentityServerConstants;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebApplicationBasic
 {
@@ -71,30 +72,59 @@ namespace WebApplicationBasic
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+    
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
             })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    options.SignInScheme = "Cookies";
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
 
+                options.Authority = "http://localhost:5000";
+                options.RequireHttpsMetadata = false;
+
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code id_token";
+
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+
+                options.Scope.Add("api1");
+                options.Scope.Add("offline_access");
+
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("dataEventRecordsAdmin", policyAdmin =>
+                {
+                    policyAdmin.RequireClaim("role", "dataEventRecords.admin");
+                });
+                options.AddPolicy("admin", policyAdmin =>
+                {
+                    policyAdmin.RequireClaim("role", "admin");
+                });
+                options.AddPolicy("dataEventRecordsUser", policyUser =>
+                {
+                    policyUser.RequireClaim("role", "dataEventRecords.user");
+                });
+ 
+            });
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
                     options.Authority = "http://localhost:5000";
                     options.RequireHttpsMetadata = false;
 
-                    options.ClientId = "mvc";
-                    options.ClientSecret = "secret";
-                    options.ResponseType = "code id_token";
+                    options.ApiName = "api1";
 
-                    options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
-
-                    options.Scope.Add("api1");
-                    options.Scope.Add("offline_access");
                 });
-                // .AddOpenIdConnect();
 
             //services.UseCookieAuthentication(new CookieAuthenticationOptions
             //{
@@ -158,6 +188,7 @@ namespace WebApplicationBasic
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
         }
     }
 }
