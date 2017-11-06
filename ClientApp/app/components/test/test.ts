@@ -42,15 +42,24 @@ export class Test extends BaseViewModel
               });
           });
 
-          let response = await client.fetch('identity');
-          let json = await response.json();
-          console.log(json);
+          try
+          {
+            let response = await client.fetch('identity');
+            let json = await response.json();
+            console.log(json);
+          }
+          catch(e)
+          {
+            this.logger.error("And the error is - " + (<Error>e).message);
+          }
+          
 
-            // client
-            //   .fetch('identity')
-            //   .then(response => response.json())
-            //   .then(data => {
-            //     console.log(data);
-            //   });
+            client
+              .fetch('identity')
+              .then(response => response.json())
+              .then(data => {
+                console.log(data);
+              })
+              .catch(e => this.logger.error(e));
     }
 }
