@@ -9,7 +9,7 @@ export class Home extends BaseViewModel {
         super(userManager);
 
 
-        console.log('Hallo');
+        this.logger.error("from home");
         // var config = {
         //     authority: "http://localhost:5000",
         //     client_id: "js",
