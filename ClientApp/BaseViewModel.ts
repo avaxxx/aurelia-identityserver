@@ -11,8 +11,10 @@ import {Container} from 'aurelia-framework';
 export class BaseViewModel{
 
     public user : Oidc.User;
+    public userPromise: Promise<Oidc.User>;
     private userManager: UserManager;
     protected logger: Logger;
+
     constructor()
     {
         this.logger = MainLogger.getLogger('baseviewmodel');
@@ -21,6 +23,8 @@ export class BaseViewModel{
         // addAppender(new ColorAppender()); 
         
         this.logger.info("Test info");
+
+        this.userPromise = this.userManager.getUser();
 
         this.userManager.getUser().then((user) => {
             this.user = user;

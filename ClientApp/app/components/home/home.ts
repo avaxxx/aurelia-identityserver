@@ -37,7 +37,9 @@ export class Home extends BaseViewModel {
         
     }
 
-    attached() {
+    async attached() {
+        let user = await this.userPromise;
+        this.logger.info(user.access_token);
         // $('#testUl').css('background-color', 'blue'); 
         // this.logger.info(this.user.toStorageString());   
     }
