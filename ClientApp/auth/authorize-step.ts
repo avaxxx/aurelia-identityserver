@@ -32,7 +32,7 @@ export default class OpenIdConnectAuthorizeStep {
 
     private requiresRole(navigationInstruction: NavigationInstruction, role: OpenIdConnectRoles): boolean {
         return navigationInstruction.getAllInstructions().some((instruction) => {
-            return instruction.config.settings.roles !== undefined &&
+            return instruction.config.settings !== undefined && instruction.config.settings.roles !== undefined &&
                 instruction.config.settings.roles.indexOf(role) >= 0;
         });
     }

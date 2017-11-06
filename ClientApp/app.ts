@@ -1,3 +1,5 @@
+import { MainLogger } from './MainLogger';
+import { getLogger, Logger } from 'aurelia-logging';
 import { Aurelia, PLATFORM, autoinject } from 'aurelia-framework';
 import { Router, RouterConfiguration, NavigationInstruction  } from 'aurelia-router';
 import {AuthenticateStep} from 'aurelia-authentication';
@@ -11,6 +13,7 @@ import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
 export class App {
     router: Router;
     mgr: UserManager;
+    logger: Logger;
 
     constructor
         (
@@ -19,7 +22,7 @@ export class App {
                 
         ){
             this.openIdConnect.logger.enableLogging(Log.INFO);
-            
+            this.logger = MainLogger.getLogger('routing');
         // var config = {
         //     authority: "http://localhost:5000",
         //     client_id: "js",
@@ -41,6 +44,19 @@ export class App {
 
         const { attributes } = require("aurelia-webpack-plugin/dist/html-requires-loader");
         attributes["router-view"] = [ "layout-view", "layout-view-model" ];
+
+        let step = {
+            run: (navigationInstruction, next) => {
+              this.logger.debug("pre-act for" + navigationInstruction.config.moduleId);
+              return next();
+            }
+          };
+          config.addPreActivateStep(step);
+
+          config.mapUnknownRoutes((instruction) => {
+            let path = instruction.fragment.toLowerCase();
+            return PLATFORM.moduleName("./not-found");
+          });
 
         // config.addPipelineStep('authorize', AuthenticateStep); // Add a route filter so only authenticated uses are authorized to access some routes
         
@@ -95,9 +111,9 @@ export class App {
             title: 'Materialise demo'
         },
         { 
-            route: 'test',      
+            route: 'test/:id',      
              name: 'test', 
-             nav: true,
+            //  nav: true,
              settings: { icon: 'th-list' },             
              moduleId: PLATFORM.moduleName('./app/components/test/test'), 
             //  layoutView: PLATFORM.moduleName('layout'),

@@ -3,13 +3,13 @@ import { BaseViewModel } from './../../../BaseViewModel';
 import { UserManager } from 'oidc-client'
 import * as $ from "jquery"
 
-@autoinject
+//@autoinject
 export class Home extends BaseViewModel {
-    constructor(userManager: UserManager){
-        super(userManager);
+    constructor(){
+        super();
 
 
-        this.logger.error("from home");
+        
         // var config = {
         //     authority: "http://localhost:5000",
         //     client_id: "js",
@@ -38,7 +38,7 @@ export class Home extends BaseViewModel {
     }
 
     attached() {
-        // $('#testUl').css('background-color', 'blue');    
-        console.log(this.user);    
+        // $('#testUl').css('background-color', 'blue'); 
+        // this.logger.info(this.user.toStorageString());   
     }
 }

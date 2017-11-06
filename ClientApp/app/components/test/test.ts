@@ -4,15 +4,14 @@ import { autoinject } from 'aurelia-framework';
 import { BaseViewModel } from './../../../BaseViewModel';
 import {HttpClient} from 'aurelia-fetch-client';
 
-@autoinject
 
 export class Test extends BaseViewModel
 {
-    constructor(userManager: UserManager){
-        super(userManager);
+    constructor(){
+      super();
     }
 
-    callApi = () =>  {
+    callApi = async () =>  {
 
         let token = "";
         if (this.user != undefined)
@@ -43,11 +42,15 @@ export class Test extends BaseViewModel
               });
           });
 
-            client
-              .fetch('identity')
-              .then(response => response.json())
-              .then(data => {
-                console.log(data);
-              });
+          let response = await client.fetch('identity');
+          let json = await response.json();
+          console.log(json);
+
+            // client
+            //   .fetch('identity')
+            //   .then(response => response.json())
+            //   .then(data => {
+            //     console.log(data);
+            //   });
     }
 }
