@@ -142,7 +142,13 @@ export class App {
             settings: {
                 roles: [OpenIdConnectRoles.Anonymous]
             },
-            },
+        },
+        {
+            name: "not-authorized",
+            nav: false,
+            route: "not-authorized",
+            moduleId: PLATFORM.moduleName('./resources/components/notauthorized/not-authorized'), 
+        },
         //     route: 'login',
         //     name: 'login',
         //     settings: { icon: 'th-list' },
