@@ -1,0 +1,16 @@
+<template>
+    <div slot="main-content">
+        <!-- possible definition of templates -->
+
+        <compose view-model="../../../resources/components/person/person"></compose>
+       
+        <compose view-model="../../../resources/components/person/person" model.bind="{id: 3, name: 'Third name'}"></compose>
+
+        <compose view-model="../../../resources/components/person/person" model.bind="person2"></compose>
+
+        <compose view-model.bind="instanceOfComponent"></compose>
+        
+
+        <compose view="../../../resources/templates/persontemplate.html" view-model.bind="person"></compose>
+    </div> 
+</template>

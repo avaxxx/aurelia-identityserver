@@ -149,6 +149,15 @@ export class App {
             route: "not-authorized",
             moduleId: PLATFORM.moduleName('./resources/components/notauthorized/not-authorized'), 
         },
+        {
+            route: 'template',
+            name: 'template',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('./app/components/template/template'),
+            nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'),            
+            title: 'Template demo'
+        },
         //     route: 'login',
         //     name: 'login',
         //     settings: { icon: 'th-list' },

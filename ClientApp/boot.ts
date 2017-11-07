@@ -21,7 +21,8 @@ export function configure(aurelia: Aurelia) {
         config.userManagerSettings = oidcConfig.userManagerSettings;
         config.loginRedirectModuleId = oidcConfig.loginRedirectModuleId;
         config.logoutRedirectModuleId = oidcConfig.logoutRedirectModuleId;
-      });
+      })
+    .feature(PLATFORM.moduleName('resources/index'));
     // .plugin(PLATFORM.moduleName('aurelia-authentication'), baseConfig => {
     //     baseConfig.configure(authConfig);
     // });
