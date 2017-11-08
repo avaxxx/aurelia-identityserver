@@ -1,10 +1,11 @@
+import { Claim } from './../resources/model/Claim';
 import { MainLogger } from './../MainLogger';
 import { BaseService } from './BaseService';
 import { autoinject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-fetch-client';
 export interface IIdentityService{
-    get():any;
-    getAwait():any;
+    get():Promise<Claim[]>;
+    getAwait():Promise<Claim[]>;
 }
 
 export class IdentityService extends BaseService implements IIdentityService{
@@ -17,7 +18,7 @@ export class IdentityService extends BaseService implements IIdentityService{
         {
           let response = await this.httpClient.fetch('identity');
           let data = await response.json();
-          return data;
+          return data.map(item => Claim.fromObject(item));
         }
         catch(e)
         {
@@ -29,13 +30,9 @@ export class IdentityService extends BaseService implements IIdentityService{
     }
 
     get(){
-        this.httpClient
+        return this.httpClient
         .fetch('identity')
-        .then(response => response.json())
-        .then(data => {
-          return data;;
-        })
-        .catch(e => this.logger.error(e));
+        .then(response => response.json());
     }
 
 }

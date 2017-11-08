@@ -2,6 +2,18 @@
     
       <div slot="main-content">
           <button type="button" click.delegate="callApi()">Call API</button>
-          
+      
+          <br>
+
+          <div>
+              <h1>List of claims</h1>
+              <ul repeat.for="claim of claims">
+                <li>Claim type - ${claim.type} - Claim value - ${claim.value}</li>
+              </ul>
+          </div>
+
+
       </div>
+
+
     </template>

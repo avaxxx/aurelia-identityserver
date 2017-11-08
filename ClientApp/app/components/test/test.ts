@@ -1,3 +1,4 @@
+import { Claim } from './../../../resources/model/Claim';
 import { IIdentityService, IdentityService } from './../../../services/IdentityService';
 import { User } from 'oidc-client';
 import { UserManager } from 'oidc-client';
@@ -10,18 +11,19 @@ import {HttpClient} from 'aurelia-fetch-client';
 export class Test extends BaseViewModel
 {
     private identityService: IIdentityService;
+    private claims: Claim[];
     constructor(private httpClient:HttpClient){
       super();
       this.identityService = new IdentityService(this.user);
     }
 
     callApi = async () =>  {
-        let result = await this.identityService.getAwait();
-        this.logger.info("data getAwait");
-        this.logger.info(result);
+        this.claims = await this.identityService.getAwait();
 
-        let res = this.identityService.get();
-        this.logger.info("data get");
-        this.logger.info(res);
+        // this.identityService.get()
+        // .then(data =>{
+        //   this.claims = data.map(item => Claim.fromObject(item));
+        // } )
+        // .catch(e => this.logger.error(e));
     }
 }
