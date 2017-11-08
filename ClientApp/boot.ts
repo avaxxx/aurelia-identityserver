@@ -1,3 +1,4 @@
+import { HttpClient } from 'aurelia-fetch-client';
 import 'isomorphic-fetch';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
 //import 'bootstrap/dist/css/bootstrap.css';
@@ -26,6 +27,8 @@ export function configure(aurelia: Aurelia) {
     // .plugin(PLATFORM.moduleName('aurelia-authentication'), baseConfig => {
     //     baseConfig.configure(authConfig);
     // });
+
+    aurelia.container.registerTransient(HttpClient);
 
     if (IS_DEV_BUILD) {
         aurelia.use.developmentLogging();

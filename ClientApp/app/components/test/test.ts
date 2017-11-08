@@ -1,3 +1,4 @@
+import { IIdentityService, IdentityService } from './../../../services/IdentityService';
 import { User } from 'oidc-client';
 import { UserManager } from 'oidc-client';
 import { autoinject } from 'aurelia-framework';
@@ -5,61 +6,22 @@ import { BaseViewModel } from './../../../BaseViewModel';
 import {HttpClient} from 'aurelia-fetch-client';
 
 
+@autoinject(HttpClient)
 export class Test extends BaseViewModel
 {
-    constructor(){
+    private identityService: IIdentityService;
+    constructor(private httpClient:HttpClient){
       super();
+      this.identityService = new IdentityService(this.user);
     }
 
     callApi = async () =>  {
+        let result = await this.identityService.getAwait();
+        this.logger.info("data getAwait");
+        this.logger.info(result);
 
-        let token = "";
-        if (this.user != undefined)
-        {
-            token = this.user.access_token;
-        }
-
-        let client = new HttpClient();
-        
-        client.configure(config => {
-            config
-              .useStandardConfiguration()
-              .withBaseUrl('/api/')
-              .withDefaults({
-                credentials: 'same-origin',
-                headers: {
-                  'X-Requested-With': 'Fetch'
-                }
-              })
-              .withInterceptor({
-                request(request) {
-                  if (token != "")
-                  {
-                    request.headers.append('Authorization', 'Bearer ' + token);                    
-                  }
-                  return request;
-                }
-              });
-          });
-
-          try
-          {
-            let response = await client.fetch('identity');
-            let json = await response.json();
-            console.log(json);
-          }
-          catch(e)
-          {
-            this.logger.error("And the error is - " + (<Error>e).message);
-          }
-          
-
-            client
-              .fetch('identity')
-              .then(response => response.json())
-              .then(data => {
-                console.log(data);
-              })
-              .catch(e => this.logger.error(e));
+        let res = this.identityService.get();
+        this.logger.info("data get");
+        this.logger.info(res);
     }
 }
