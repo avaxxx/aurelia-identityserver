@@ -42,8 +42,8 @@ export class App {
         
         config.addPipelineStep("authorize", OpenIdConnectAuthorizeStep);
 
-        const { attributes } = require("aurelia-webpack-plugin/dist/html-requires-loader");
-        attributes["router-view"] = [ "layout-view", "layout-view-model" ];
+        // const { attributes } = require("aurelia-webpack-plugin/dist/html-requires-loader");
+        // attributes["router-view"] = [ "layout-view", "layout-view-model" ];
 
         let step = {
             run: (navigationInstruction, next) => {
