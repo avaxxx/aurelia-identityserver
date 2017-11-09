@@ -158,6 +158,15 @@ export class App {
             layoutViewModel: PLATFORM.moduleName('main-layout'),            
             title: 'Template demo'
         },
+        {
+            route: 'contact',
+            name: 'contact',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('./app/components/contact/contactviewmodel'),
+            nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'),            
+            title: 'Manage contact'
+        },
         //     route: 'login',
         //     name: 'login',
         //     settings: { icon: 'th-list' },

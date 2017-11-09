@@ -1,4 +1,4 @@
-#addin "Cake.Yarn
+#addin "Cake.Yarn"
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -41,12 +41,12 @@ Task("Build")
     DotNetCoreBuild("./");
 });
 
-Task("Yarn").IsDependentOn("Build")
+Task("YarnBuild").IsDependentOn("Build")
 .Does(() =>
 {
-    Yarn.Ru
+    Yarn.RunScript("webpack:dev");
 });
 
-Task("Default").IsDependentOn("Yarn");
+Task("Default").IsDependentOn("YarnBuild");
 
 RunTarget(target);
