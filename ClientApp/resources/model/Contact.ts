@@ -1,14 +1,15 @@
 import { ValidationRules} from 'aurelia-validation'
-import '../validation/rules'
+import 'resources/validation/rules'
 export class Contact{
 
     constructor()
     {
         this.address = new Address();
         ValidationRules
-        .ensure('firstName').required()
-        .ensure('phoneNumber').required()
-        //.ensure('lastName').satisfiesRule('between')
+        .ensure((p: Contact) => p.firstName).displayName('First Name').required()
+        .ensure((p: Contact) => p.phoneNumber).required()
+        .ensure((p: Contact) => p.selectedDate).required()
+        // .ensure((p: Contact) => p.lastName).required().satisfiesRule('integerRange',1,1000)
         .on(this);
     }
 
@@ -20,7 +21,7 @@ export class Contact{
     public sendNewsletter: boolean;
     public email: string;
     public phoneNumber: string;
-
+    public selectedDate: string;
     public address: Address;
 
 }

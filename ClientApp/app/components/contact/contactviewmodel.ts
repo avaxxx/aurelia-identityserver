@@ -5,6 +5,7 @@ import { autoinject } from 'aurelia-framework';
 import { BootstrapFormRenderer } from '../../../resources/validation/bootstrap-form-renderer';
 
 import '../../../../kendo/js/kendo.combobox.min';
+import '../../../../kendo/js/kendo.datepicker.min';
 
 @autoinject
 export class ContactViewModel extends BaseViewModel{

@@ -16,7 +16,11 @@ Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false 
 export function configure(aurelia: Aurelia) {
     aurelia.use.standardConfiguration()
     .plugin(PLATFORM.moduleName('aurelia-kendoui-bridge'))
-    .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b => b.useAll())      
+    .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'),
+         config => {
+             config.useAll();
+             //config.notifyBindingBehavior
+            })      
     .plugin(PLATFORM.moduleName("aurelia-open-id-connect"),  
     (config: OpenIdConnectConfiguration) => {
         config.userManagerSettings = oidcConfig.userManagerSettings;

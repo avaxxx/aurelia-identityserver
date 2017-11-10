@@ -1,6 +1,7 @@
 <template>
       <div slot="main-content">
           <require from="aurelia-kendoui-bridge/combobox/combobox"></require>
+          <require from="aurelia-kendoui-bridge/datepicker/datepicker"></require>
           <section class="container">
               <h1 if.bind="isNew">New contact</h1>
                 <form class="form-horizontal" validation-renderer="bootstrap-form"> 
@@ -17,10 +18,15 @@
                           </div>
                         </div>
                         <div class="form-group">
+                          <label for="inputSelectedDate" class="col-sm-2 control-label">Date</label>
+                          <div class="col-sm-10">
+                            <input id="datepicker" ak-datepicker="k-value.two-way: contact.selectedDate & validate" style="width: 100%" />
+                         </div>
+                        </div>
+                        <div class="form-group">
                           <label for="inputPhoneNumber" class="col-sm-2 control-label">Phone Number</label>
                           <div class="col-sm-10">
-                              <input type="hidden" value.two-way="contact.phoneNumber & validate" />
-                              <ak-combobox k-value.two-way="contact.phoneNumber">
+                              <ak-combobox k-value.two-way="contact.phoneNumber & validate">
                                   <select style="width: 100%;">
                                     <option></option>
                                     <option>X-Small</option>

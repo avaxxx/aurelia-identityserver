@@ -8,7 +8,9 @@
     "skipDefaultLibCheck": true,
     "lib": [ "es2015", "dom" ],
     "types": [ "node", "@types/kendo-ui"  ],
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./ClientApp"
+    // "strictNullChecks": true
   },
   "exclude": [ "bin", "node_modules" ]
   // "atom": { "rewriteTsconfig": false }
