@@ -1,8 +1,10 @@
 import { BaseViewModel } from './../../../BaseViewModel';
 import { Contact } from './../../../resources/model/Contact';
-import { ValidationControllerFactory, ValidationController } from 'aurelia-validation'
+import { ValidationControllerFactory, ValidationController, validateTrigger } from 'aurelia-validation'
 import { autoinject } from 'aurelia-framework';
 import { BootstrapFormRenderer } from '../../../resources/validation/bootstrap-form-renderer';
+
+import '../../../../kendo/js/kendo.combobox.min';
 
 @autoinject
 export class ContactViewModel extends BaseViewModel{
@@ -14,7 +16,8 @@ export class ContactViewModel extends BaseViewModel{
     {
         super();
         this.validationController = validationControllerFactory.createForCurrentScope();
-        this.validationController.addRenderer(new BootstrapFormRenderer());
+        //this.validationController.addRenderer(new BootstrapFormRenderer());
+        this.validationController.validateTrigger = validateTrigger.changeOrBlur;
     }
 
     activate(params: any, routeConfig, navigationInstruction) {

@@ -1,4 +1,5 @@
 import { ValidationRules} from 'aurelia-validation'
+import '../validation/rules'
 export class Contact{
 
     constructor()
@@ -6,6 +7,8 @@ export class Contact{
         this.address = new Address();
         ValidationRules
         .ensure('firstName').required()
+        .ensure('phoneNumber').required()
+        //.ensure('lastName').satisfiesRule('between')
         .on(this);
     }
 
