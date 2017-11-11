@@ -1,0 +1,92 @@
+<template>
+        <require from="aurelia-kendoui-bridge/combobox/combobox"></require>
+        <require from="aurelia-kendoui-bridge/datepicker/datepicker"></require>
+        <require from="aurelia-kendoui-bridge/multiselect/multiselect"></require>
+    <ux-dialog>
+        <form class="form-horizontal" validation-renderer="bootstrap-form" submit.trigger="ok()"> 
+            <ux-dialog-body>
+            <div class="form-group">
+              <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputFirstName" placeholder="First name" value.bind="contact.firstName & validate" attach-focus="true">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" value.bind="contact.lastName & validate">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputSelectedDate" class="col-sm-2 control-label">Date</label>
+              <div class="col-sm-10">
+                <input id="datepicker" ak-datepicker="k-value.two-way: contact.selectedDate & validate" style="width: 100%" />
+             </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPhoneNumber" class="col-sm-2 control-label">Phone Number</label>
+              <div class="col-sm-10">
+                  <ak-combobox k-value.two-way="contact.phoneNumber & validate">
+                      <select style="width: 100%;">
+                        <option></option>
+                        <option>X-Small</option>
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                        <option>X-Large</option>
+                        <option>2X-Large</option>
+                      </select>
+                    </ak-combobox>
+                <!-- <input type="text" 
+                  class="form-control" 
+                  id="inputPhoneNumber" 
+                  ak-maskedtextbox="k-value: 555 123 4567; k-mask: (999) 000-0000;k-value.two-way='contact.phoneNumber & validate'" 
+                 /> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" checked.bind="contact.sendNewsletter"> Send newsletter
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputSelectedPeople" class="col-sm-2 control-label">Select People</label>
+              <div class="col-sm-10">
+                <ak-multiselect k-value.two-way="contact.selectedPeople & validate">
+                  <select multiple="multiple" data-placeholder="Select attendees...">
+                      <option>Steven White</option>
+                      <option>Nancy King</option>
+                      <option>Nancy Davolio</option>
+                      <option>Robert Davolio</option>
+                      <option>Michael Leverling</option>
+                      <option>Andrew Callahan</option>
+                      <option>Michael Suyama</option>
+                      <option selected>Anne King</option>
+                      <option>Laura Peacock</option>
+                      <option>Robert Fuller</option>
+                      <option>Janet White</option>
+                      <option>Nancy Leverling</option>
+                      <option>Robert Buchanan</option>
+                      <option>Margaret Buchanan</option>
+                      <option selected>Andrew Fuller</option>
+                      <option>Anne Davolio</option>
+                      <option>Andrew Suyama</option>
+                      <option>Nige Buchanan</option>
+                      <option>Laura Fuller</option>
+                  </select>
+                </ak-multiselect>                         
+            </div>
+            </div>
+
+        </ux-dialog-body>
+        <ux-dialog-footer>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button class="btn btn-danger" click.trigger="cancel()">Cancel</button>            
+        </ux-dialog-footer>
+          </form>
+    </ux-dialog>
+</template>

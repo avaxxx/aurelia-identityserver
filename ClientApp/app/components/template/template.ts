@@ -5,7 +5,7 @@ export class Template{
     person: IPerson;
     person2: IPerson;
     instanceOfComponent: Person;
-
+    photo:any;
     constructor()
     {
         this.person = {id:1, name: "Person name"};

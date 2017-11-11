@@ -1,3 +1,4 @@
+import { Contact } from './resources/model/Contact';
 import { MainLogger } from './MainLogger';
 import { getLogger, Logger } from 'aurelia-logging';
 import { Aurelia, PLATFORM, autoinject } from 'aurelia-framework';
@@ -8,17 +9,20 @@ import NavigationStrategies from './auth/navigation-strategies'
 import OpenIdConnectAuthorizeStep from './auth/authorize-step'
 import OpenIdConnectConfiguration from './open-id-connect-configuration'
 import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
+import { EventAggregator, Subscription } from "aurelia-event-aggregator";
 
 @autoinject
 export class App {
     router: Router;
     mgr: UserManager;
     logger: Logger;
+    subscription: Subscription;
 
     constructor
         (
                 private openIdConnectNavigationStrategies: NavigationStrategies,
-                private openIdConnect: OpenIdConnect
+                private openIdConnect: OpenIdConnect,
+                private eventAggregator: EventAggregator
                 
         ){
             this.openIdConnect.logger.enableLogging(Log.INFO);
@@ -213,8 +217,19 @@ export class App {
                 ]);
      
         this.router = router;
+
+
     }
 
+    activate(){
+        this.subscription = this.eventAggregator.subscribe('contactvalidationfailed', (e: Contact) => {
+            this.logger.warn('Validation failed for ' + e.firstName);
+        });
+    }
+
+    deactivate(){
+        this.subscription.dispose();
+    }
     
     private isSilentLogin(): boolean {
         try {

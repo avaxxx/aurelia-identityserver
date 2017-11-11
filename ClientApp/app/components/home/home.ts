@@ -4,16 +4,16 @@ import { autoinject } from 'aurelia-framework';
 import { BaseViewModel } from './../../../BaseViewModel';
 import { UserManager } from 'oidc-client'
 import * as $ from "jquery"
+import { DialogController  } from "aurelia-dialog";
 
 
-
-//@autoinject
+@autoinject
 export class Home extends BaseViewModel {
     styleAsString : string;
     styleAsObject : object; 
     text: string;
     
-    constructor(){
+    constructor(private dialogController: DialogController){
         super();
         this.styleAsString = 'font-weight: bold; font-size: 5em;';
         this.styleAsObject = {
@@ -28,4 +28,6 @@ export class Home extends BaseViewModel {
         // $('#testUl').css('background-color', 'blue'); 
         // this.logger.info(this.user.toStorageString());   
     }
+
+
 }

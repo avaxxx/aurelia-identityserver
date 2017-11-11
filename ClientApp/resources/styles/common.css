@@ -9,3 +9,8 @@ div.has-error .k-widget
         padding-top: 50px;
     }
 }
+
+ux-dialog-overlay.active {
+    background-color: black;
+    opacity: .5;
+  }

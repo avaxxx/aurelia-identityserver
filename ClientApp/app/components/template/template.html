@@ -1,5 +1,7 @@
 <template>
     <div slot="main-content">
+        <require from="../../../resources/components/person-edit/person-edit.html"></require>
+        <require from="../../../resources/elements/file-picker/file-picker"></require>
         <!-- possible definition of templates -->
 
         <compose view-model="../../../resources/components/person/person"></compose>
@@ -9,8 +11,15 @@
         <compose view-model="../../../resources/components/person/person" model.bind="person2"></compose>
 
         <compose view-model.bind="instanceOfComponent"></compose>
-        
-
+    
         <compose view="../../../resources/templates/persontemplate.html" view-model.bind="person"></compose>
+
+        <h4>Add </h4>
+        <person-edit person.bind="person2"></person-edit>
+
+        <file-picker input-id="photo" accept="image/*" files.bind="photo" class="thumbnail">
+    
+    	            <img show.bind="preview" blob-src.bind="preview" alt="Preview">
+         </file-picker>
     </div> 
 </template>

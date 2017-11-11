@@ -5,11 +5,12 @@ export class Contact{
     constructor()
     {
         this.address = new Address();
+        this.selectedPeople = new Array<string>();
         ValidationRules
         .ensure((p: Contact) => p.firstName).displayName('First Name').required()
         .ensure((p: Contact) => p.phoneNumber).required()
         .ensure((p: Contact) => p.selectedDate).required()
-        // .ensure((p: Contact) => p.lastName).required().satisfiesRule('integerRange',1,1000)
+        .ensure((p: Contact) => p.selectedPeople).required().maxItems(2)
         .on(this);
     }
 
@@ -23,7 +24,7 @@ export class Contact{
     public phoneNumber: string;
     public selectedDate: string;
     public address: Address;
-
+    public selectedPeople: string[];
 }
 
 export class Address{
