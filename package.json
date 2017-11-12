@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/googlemaps": "^3.29.2",
     "@types/kendo-ui": "^2017.3.1",
-    "@types/react": "^15.6.1",
+    "@types/react": "^16.0.22",
     "aurelia-authentication": "^3.7.0",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-dialog": "^1.0.0-rc.2.0.0",
@@ -37,9 +37,10 @@
     "load-google-maps-api": "^1.0.0",
     "materialize-css": "^0.100.2",
     "mutationobserver-shim": "^0.3.2",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0",
-    "react-select": "^1.0.0-rc.5"
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-google-maps": "^9.2.2",
+    "react-select": "^1.0.0-rc.10"
   },
   "devDependencies": {
     "@types/node": "^8.0.47",
