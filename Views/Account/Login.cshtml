@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
 @using AuAuth.Database.Entities
+@using AuAuth.Resources
 @model LoginViewModel
 @inject SignInManager<User> SignInManager
 
@@ -12,6 +13,7 @@
 
 <h2>@ViewData["Title"].</h2>
 <div class="row">
+    <h1>@Resource.HelloMessage</h1>
     <div class="col-md-8">
         <section>
             <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post" class="form-horizontal">

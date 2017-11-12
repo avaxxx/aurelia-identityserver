@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
+using AuAuth.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -16,9 +17,9 @@ namespace AuAuth.Api
         [HttpGet]
         public IActionResult Get(string language)
         {
-            string lng = ConvertLanguage(language);
+            string lng = Translations.ConvertLanguage(language);
 
-            var rm = new ResourceManager(typeof(AuAuth.resources.Resource));
+            var rm = new ResourceManager(typeof(AuAuth.Resources.Resource));
 
             var culture = new CultureInfo(lng);
             var resourceSet = rm.GetResourceSet(culture, true, true);
@@ -30,18 +31,7 @@ namespace AuAuth.Api
             return new JsonResult(resourceDictionary);
         }
 
-        private string ConvertLanguage(string language)
-        {
-            switch (language)
-            {
-                case "en":
-                    return "en-US";
-                case "fr":
-                    return "fr-FR";
-                default:
-                    return "en-US";
-            }
-        }
+       
     }
  }
  

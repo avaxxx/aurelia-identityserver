@@ -22,6 +22,10 @@ using Microsoft.AspNetCore.Authentication.Google;
 using static IdentityServer4.IdentityServerConstants;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
+using AuAuth.Helpers;
 
 namespace WebApplicationBasic
 {
@@ -37,6 +41,28 @@ namespace WebApplicationBasic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization(options => options.ResourcesPath = "resources");
+
+            services.Configure<RequestLocalizationOptions>(
+                options =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                        {
+                            new CultureInfo("en-US"),
+                            new CultureInfo("fr-FR"),
+                        };
+        
+                    options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+                    options.SupportedCultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
+        
+                    options.RequestCultureProviders.Clear();
+                    var provider = new LocalizationCookieProvider
+                    {
+                        CookieName = "i18next"
+                    };
+                    options.RequestCultureProviders.Insert(0, provider);
+                });
              // Add framework services.
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -175,7 +201,8 @@ namespace WebApplicationBasic
             // app.UseAuthentication(); // not needed, since UseIdentityServer adds the authentication middleware
             app.UseIdentityServer();
 
-
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
 
             
             app.UseMvc(routes =>

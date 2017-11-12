@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuAuth.resources {
+namespace AuAuth.Resources {
     using System;
     
     
