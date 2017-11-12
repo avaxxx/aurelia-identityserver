@@ -42,7 +42,7 @@
     <Folder Include="IdentityServer\Models\" />
     <Folder Include="IdentityServer\Services\" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup></ItemGroup>
     <Compile Update="resources\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

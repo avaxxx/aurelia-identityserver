@@ -75,7 +75,7 @@ function boot(aurelia: Aurelia) {
                 caches: ['localStorage', 'cookie']
             },
             attributes: aliases,
-            lng: 'en',
+            //lng: 'en',
             fallbackLng: 'en',
             debug: true
         });

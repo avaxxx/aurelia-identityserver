@@ -36,11 +36,11 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2016 - Host</p>
+            <p>&copy; @DateTime.Now.Year - Host</p>
         </footer>
     </div>
-    <script src="~/identityserver/jquery.min.js"></script>/>
-    <script src="~/identityserver/bootstrap.min.js"></script>/>
+    <script src="~/identityserver/jquery.min.js"></script>
+    <script src="~/identityserver/bootstrap.min.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>
