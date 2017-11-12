@@ -44,6 +44,7 @@ Task("Build")
 Task("YarnBuild").IsDependentOn("Build")
 .Does(() =>
 {
+    Yarn.Install();
     Yarn.RunScript("webpack:dev");
 });
 
