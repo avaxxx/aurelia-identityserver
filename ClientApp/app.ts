@@ -171,6 +171,15 @@ export class App {
             layoutViewModel: PLATFORM.moduleName('main-layout'),            
             title: 'Manage contact'
         },
+        {
+            route: 'google-map',
+            name: 'google-map',
+            settings: { icon: 'th-list' },
+            moduleId: PLATFORM.moduleName('./app/components/google/google-map'),
+            nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'),            
+            title: 'Google map'
+        },
         //     route: 'login',
         //     name: 'login',
         //     settings: { icon: 'th-list' },
