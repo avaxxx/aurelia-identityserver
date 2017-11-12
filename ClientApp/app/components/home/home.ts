@@ -1,3 +1,4 @@
+import { I18N } from 'aurelia-i18n';
 import { Person } from './../../../resources/components/person/person';
 import { IPerson } from './../../../resources/model/IPerson';
 import { autoinject } from 'aurelia-framework';
@@ -13,13 +14,15 @@ export class Home extends BaseViewModel {
     styleAsObject : object; 
     text: string;
     
-    constructor(private dialogController: DialogController){
+    constructor(private dialogController: DialogController, private i18n: I18N){
         super();
         this.styleAsString = 'font-weight: bold; font-size: 5em;';
         this.styleAsObject = {
             'font-weight':'bold',
             'font-size':'5em'
         }
+        console.log(this.i18n.getLocale());
+        console.log(this.i18n.tr('Hello'));
     }
 
     async attached() {

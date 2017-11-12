@@ -33,7 +33,8 @@ module.exports = (env) => {
                     issuer: /\.[tj]s$/i
                 },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, loader: 'url-loader?limit=100000' }
+                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, loader: 'url-loader?limit=100000' },
+                // { test: /\.json$/i, use: 'json-loader' }
             ]
         },
         plugins: [
@@ -56,6 +57,12 @@ module.exports = (env) => {
                     "./open-id-connect-user-block",
                     "./open-id-connect-role-filter",
                     "./open-id-connect-user-debug"
+                ],
+                "aurelia-i18n":[
+                    // PLATFORM.moduleName(path.join(__dirname,"./ClientApp/locales/en/translation.json")),
+                    // PLATFORM.moduleName(path.join(__dirname,"./ClientApp/locales/fr/translation.json"))
+                    // "../../../../ClientApp/resources/locales/en/translation.json",
+                    // "../../../../ClientApp/resources/locales/fr/translation.json"
                 ]
               })
         ].concat(isDevBuild ? [
