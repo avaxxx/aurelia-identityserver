@@ -59,8 +59,8 @@ function boot(aurelia: Aurelia) {
         TCustomAttribute.configureAliases(aliases);
 
         // register backend plugin
-        instance.i18next.use(Backend); 
-        instance.i18next.use(LngDetector);    
+        instance.i18next.use(Backend).use(LngDetector); 
+        // instance.i18next.use(LngDetector);    
 
         return instance.setup({
             backend:{
@@ -75,7 +75,7 @@ function boot(aurelia: Aurelia) {
                 caches: ['localStorage', 'cookie']
             },
             attributes: aliases,
-            //lng: 'en',
+            lng: '',
             fallbackLng: 'en',
             debug: true
         });

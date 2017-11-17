@@ -82,7 +82,7 @@ namespace WebApplicationBasic
                 .AddInMemoryPersistedGrants()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
+                .AddInMemoryClients(Config.GetClients(Configuration.GetValue<string>("IdentityServerUrl")))
                 .AddAspNetIdentity<User>()
                 .AddProfileService<IdentityProfileService>();
 
@@ -110,7 +110,7 @@ namespace WebApplicationBasic
             {
                 options.SignInScheme = "Cookies";
 
-                options.Authority = "http://localhost:5000";
+                options.Authority = Configuration.GetValue<string>("IdentityServerUrl");
                 options.RequireHttpsMetadata = false;
 
                 options.ClientId = "mvc";
@@ -145,7 +145,7 @@ namespace WebApplicationBasic
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = Configuration.GetValue<string>("IdentityServerUrl");
                     options.RequireHttpsMetadata = false;
 
                     options.ApiName = "api1";

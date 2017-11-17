@@ -1,8 +1,9 @@
 import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 import { UserManagerSettings, WebStorageStateStore } from "oidc-client";
 import { PLATFORM } from 'aurelia-framework';
+import * as Enviroment from 'environment'
 
-const appHost = "http://localhost:5000";
+const appHost = Enviroment.default.identityUrl;
 
 export default {
   loginRedirectModuleId: "login",
@@ -16,7 +17,7 @@ export default {
     // We are using Azure Active Directory as our authority.
     // See http://bit.ly/2wrX5Wg for details.
     //authority: "https://login.microsoft.com/common",
-    authority: "http://localhost:5000",
+    authority: appHost,
     automaticSilentRenew: false,
     // The interval in milliseconds between checking the user's session.
     checkSessionInterval: 10000,

@@ -6,14 +6,14 @@ import { BaseViewModel } from './../../../BaseViewModel';
 import { UserManager } from 'oidc-client'
 import * as $ from "jquery"
 import { DialogController  } from "aurelia-dialog";
-
+import * as Enviroment from 'environment'
 
 @autoinject
 export class Home extends BaseViewModel {
     styleAsString : string;
     styleAsObject : object; 
     text: string;
-    
+    appName: string;
     constructor(private dialogController: DialogController, private i18n: I18N){
         super();
         this.styleAsString = 'font-weight: bold; font-size: 5em;';
@@ -23,6 +23,8 @@ export class Home extends BaseViewModel {
         }
         console.log(this.i18n.getLocale());
         console.log(this.i18n.tr('Hello'));
+        this.appName =Enviroment.default.appName;
+        
     }
 
     async attached() {
