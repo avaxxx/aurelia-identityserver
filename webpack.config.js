@@ -50,7 +50,7 @@ module.exports = (env) => {
                 'jQuery': 'jquery',
                 'window.jQuery': 'jquery',
               }),
-            new AureliaPlugin({ aureliaApp: 'boot' }),
+            new AureliaPlugin({ aureliaApp: 'main' }),
             new ModuleDependenciesPlugin({
                 "aurelia-authentication": ["./authFilterValueConverter"],
                 "aurelia-open-id-connect": [

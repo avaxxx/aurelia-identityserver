@@ -46,7 +46,7 @@
 }
 </style>
 
-<div aurelia-app="boot">
+<div aurelia-app="main">
     <div class="spinner">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
@@ -58,3 +58,19 @@
     <script type="text/javascript" src="~/dist/vendor.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/dist/app.js" asp-append-version="true"></script>
 }
+
+@*
+@section scripts {
+<environment names="Development">
+   <script type="text/javascript" src="~/dist/vendor.bundle.js" asp-append-version="true"></script>
+   <script type="text/javascript" src="~/dist/app.bundle.js" asp-append-version="true"></script>
+ </environment>
+<environment names="Production">
+   <script type="text/javascript" asp-src-include="~/dist/common.*.bundle.js" asp-append-version="true"></script>
+ </environment>
+ <environment names="Staging, Production">
+   <script type="text/javascript" asp-src-include="~/dist/vendor.*.bundle.js" asp-append-version="true"></script>
+   <script type="text/javascript" asp-src-include="~/dist/app.*.bundle.js" asp-append-version="true"></script>
+ </environment>
+}
+*@

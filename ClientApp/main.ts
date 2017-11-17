@@ -8,7 +8,6 @@ import { HttpClient } from 'aurelia-fetch-client';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
 //import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
-declare const IS_DEV_BUILD: boolean; // The value is supplied by Webpack during the build
 import authConfig from './AuthConfig';
 import oidcConfig from "./open-id-connect-configuration";
 import * as Bluebird from 'bluebird';
@@ -16,6 +15,7 @@ import { OpenIdConnectConfiguration } from "aurelia-open-id-connect";
 import 'materialize-css';
 import * as Backend from 'i18next-xhr-backend';
 import * as LngDetector from 'i18next-browser-languagedetector';
+import environment from './environment';
 
 Bluebird.config({ warnings: { wForgottenReturn: false }, longStackTraces: false });
 
@@ -87,7 +87,7 @@ function boot(aurelia: Aurelia) {
 
     aurelia.container.registerTransient(HttpClient);
 
-    if (IS_DEV_BUILD) {
+    if (environment.debug) {
         aurelia.use.developmentLogging();
     }
 

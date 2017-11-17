@@ -189,6 +189,10 @@ namespace WebApplicationBasic
 
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true
+                    // ConfigFile="webpack.netcore.config.js",
+                    // HotModuleReplacementClientOptions = new Dictionary<string,string>{
+                    // {"reload", "true"}
+                  //}
                 });
             }
             else
