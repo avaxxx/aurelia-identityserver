@@ -6,6 +6,8 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
+var isRelease = configuration == "Release";
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -15,6 +17,7 @@ Setup(ctx =>
 {
    // Executed BEFORE the first task.
    Information($"Running tasks for {configuration}...");
+   Information($"isRelease =  {isRelease}...");
 });
 
 Teardown(ctx =>
@@ -45,9 +48,28 @@ Task("YarnBuild").IsDependentOn("Build")
 .Does(() =>
 {
     Yarn.Install();
-    Yarn.RunScript("webpack:dev");
+    if (isRelease)
+    {
+        Yarn.RunScript("webpack:prod");
+    }
+    else
+    {
+        Yarn.RunScript("webpack:dev");
+    }
 });
 
 Task("Default").IsDependentOn("YarnBuild");
+
+Task("Publish").IsDependentOn("Restore")
+    .Does(() =>
+{
+    DotNetCorePublishSettings publishSettings = new DotNetCorePublishSettings()
+    {
+        Configuration = configuration,
+        OutputDirectory = $"./publish/{configuration}/"
+    };
+
+    DotNetCorePublish("./", publishSettings);
+});
 
 RunTarget(target);

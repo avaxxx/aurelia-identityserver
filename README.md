@@ -11,3 +11,11 @@
 # Common issues 
 Error - Unhandled rejection TypeError: __WEBPACK_IMPORTED_MODULE_0_aurelia_pal__.a.injectStyles
 solution - run npm dedupe
+
+# run cake
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+ .\build.ps1 -configuration Release
+
+ ./build.ps1 -configuration Debug -Target Publish
+ ./build.ps1 -configuration Release -Target Publish
