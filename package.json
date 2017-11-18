@@ -47,7 +47,8 @@
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-google-maps": "^9.2.2",
-    "react-select": "^1.0.0-rc.10"
+    "react-select": "^1.0.0-rc.10",
+    "uglifyjs-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^8.0.47",
@@ -68,7 +69,7 @@
     "webpack-hot-middleware": "^2.20.0"
   },
   "scripts": {
-    "webpack:dev": "au prepare && webpack --config webpack.config.vendor.js && webpack",
-    "webpack:prod": "au prepare --env prod && webpack --config webpack.config.vendor.js --env.prod && webpack --env.prod"
+    "webpack:dev": "au build",
+    "webpack:prod": "au build --env prod"
   }
 }

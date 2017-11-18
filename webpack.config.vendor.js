@@ -3,8 +3,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('vendor.css');
 
-module.exports = ({ prod } = {}) => {
-    const isDevBuild = !prod;
+module.exports = ({ production } = {}) => {
+    const isDevBuild = !production;
     
     return [{
         stats: { modules: false },

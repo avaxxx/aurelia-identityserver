@@ -2,12 +2,15 @@ const path = require('path');
 const  webpack = require('webpack');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const project = require('./aurelia_project/aurelia.json');
+
 const bundleOutputDir = './wwwroot/dist';
 
-module.exports = (env) => {
-    const isDevBuild = !(env && env.prod);
-    return [{
-        stats: { modules: true },
+module.exports = ({production} = {}) => ({
+        //stats: { modules: true },
+        //stats: "detailed",
         entry: { 'app': 'aurelia-bootstrapper' },
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -26,7 +29,7 @@ module.exports = (env) => {
             rules: [
                 { test: /\.tsx?$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.html$/i, use: 'html-loader' },
-                { test: /\.css$/i, use: isDevBuild ? 'css-loader' : 'css-loader?minimize' },
+                { test: /\.css$/i, use: !production ? 'css-loader' : 'css-loader?minimize' },
                 {
                     test: /\.css$/i,
                     loader: ['style-loader', 'css-loader'],
@@ -39,7 +42,7 @@ module.exports = (env) => {
         },
         plugins: [
             new CheckerPlugin(),            
-            new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(isDevBuild) }),
+            new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(!production) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
@@ -65,13 +68,14 @@ module.exports = (env) => {
                     // "../../../../ClientApp/resources/locales/fr/translation.json"
                 ]
               })
-        ].concat(isDevBuild ? [
+        ].concat(!production ? [
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]')  // Point sourcemap entries to the original file locations on disk
             })
         ] : [
-            new webpack.optimize.UglifyJsPlugin()
+            new UglifyJsPlugin({
+                parallel: true
+            })
         ])
-    }];
-}
+})

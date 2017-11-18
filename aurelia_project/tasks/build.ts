@@ -1,4 +1,5 @@
 import * as webpackConfig from '../../webpack.config';
+import * as webpackVendorConfig from '../../webpack.config.vendor';
 import * as webpack from 'webpack';
 let project = require('../aurelia.json');
 import {CLIOptions, Configuration} from 'aurelia-cli';
@@ -8,23 +9,26 @@ import * as del from 'del';
 
 const buildOptions = new Configuration(project.build.options);
 const production = CLIOptions.getEnvironment() === 'prod';
-const server = buildOptions.isApplicable('server');
 // const extractCss = buildOptions.isApplicable('extractCss');
-const extractCss = true;
-const coverage = buildOptions.isApplicable('coverage');
 
 const config = webpackConfig({
-  production, server, extractCss, coverage
+  production
 });
 const compiler = webpack(<any>config);
 
+const configVendor = webpackVendorConfig({
+  production
+});
+const compilerConfig = webpack(<any>configVendor);
+
 function buildWebpack(done) {
-  if (CLIOptions.hasFlag('watch')) {
-    compiler.watch({}, onBuild);
-  } else {
     compiler.run(onBuild);
     compiler.plugin('done', () => done());
-  }
+}
+
+function buildWebpackVendor(done) {
+    compilerConfig.run(onBuild);
+    compilerConfig.plugin('done', () => done());
 }
 
 function onBuild(err, stats) {
@@ -44,11 +48,13 @@ function clearDist() {
 const build = gulp.series(
   clearDist,
   configureEnvironment,
+  buildWebpackVendor,
   buildWebpack
 );
 
 export {
   config,
+  buildWebpackVendor,
   buildWebpack,
   build as default
 };
