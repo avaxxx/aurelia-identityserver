@@ -1,11 +1,15 @@
 <template>
     <div slot="main-content">
-        <h1>Counter</h1>
+            <require from="materialize-css/dist/css/materialize.css"></require>   
+        <require from="nprogress/nprogress.css"></require>
+        <h1>Counter 2</h1>
 
         <p>This is a simple example of an Aurelia component.</p>
 
-        <p>Current count: <strong>${currentCount}</strong></p>
+        <p>Current count: <strong>${state.value}</strong></p>
 
         <button click.delegate="incrementCounter()">Increment</button>
+        <button click.delegate="decrementCounter()">Decrement</button>
+        <button click.delegate="callServer()">Call server</button>
     </div>
 </template>

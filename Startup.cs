@@ -188,11 +188,11 @@ namespace WebApplicationBasic
                 app.UseDatabaseErrorPage();
 
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = true,
                     // ConfigFile="webpack.netcore.config.js",
-                    // HotModuleReplacementClientOptions = new Dictionary<string,string>{
-                    // {"reload", "true"}
-                  //}
+                    HotModuleReplacementClientOptions = new Dictionary<string,string>{
+                    {"reload", "true"}
+                  }
                 });
             }
             else

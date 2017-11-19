@@ -1,6 +1,6 @@
 export default {
-  debug: false,
-  testing: false,
+  debug: true,
+  testing: true,
   identityUrl: "http://localhost:5000",
-  appName: "Aurelia prod"
+  appName: "Aurelia dev"
 };
