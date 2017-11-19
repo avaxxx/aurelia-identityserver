@@ -7,6 +7,8 @@ import thunkMiddleware  from "redux-thunk";
 import enviroment from "../../../environment";
 import * as NProgress from "nprogress";
 import { Reducer } from 'redux';
+import undoable, { ActionCreators } from 'redux-undo';
+
 @autoinject
 export class Counter {
     store: Store<{value}>;
@@ -51,6 +53,16 @@ export class Counter {
         .then(() => console.log(this.store.getState()))
     }
 
+    public undo()
+    {
+        this.store.dispatch(ActionCreators.undo())
+    }
+
+    public redo()
+    {
+        this.store.dispatch(ActionCreators.redo())
+    }
+
     detached()
     {
         this.unsubscribe();
@@ -75,7 +87,7 @@ const composeEnhancers = (
     );
     // create store
     return createStore(
-      reducer,
+      undoable(reducer),
       initialState!,
       enhancer,
     );

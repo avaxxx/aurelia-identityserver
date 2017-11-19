@@ -6,10 +6,14 @@
 
         <p>This is a simple example of an Aurelia component.</p>
 
-        <p>Current count: <strong>${state.value}</strong></p>
+        <p>Current count: <strong>${state.present.value}</strong></p>
 
         <button click.delegate="incrementCounter()">Increment</button>
         <button click.delegate="decrementCounter()">Decrement</button>
         <button click.delegate="callServer()">Call server</button>
+        <br>
+        <br>
+        <button click.delegate="undo()">Undo</button>
+        <button click.delegate="redo()">Redo</button>
     </div>
 </template>
