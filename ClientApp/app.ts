@@ -81,6 +81,14 @@ export class App {
             layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Counter',
         }, {
+            route: 'counter-redux',
+            name: 'counter-redux',
+            settings: { icon: 'education' },
+            moduleId: PLATFORM.moduleName('./app/components/counter-redux/counter-redux'),
+            nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
+            title: 'Counter-redux',
+        },{
             route: 'fetch-data',
             name: 'fetchdata',
             settings: { icon: 'th-list',roles: [OpenIdConnectRoles.Administrator] },

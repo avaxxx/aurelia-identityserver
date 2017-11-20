@@ -68,20 +68,20 @@ module.exports = ({ production, displayStatistics } = {}) => {
                 filename: './statistics-vendor.html'
               })),
             ...when(production, new UglifyJsPlugin({ parallel:true })),
-            new BrotliGzipPlugin({
+            ...when(production, new BrotliGzipPlugin({
                 asset: '[path].br[query]',
                 algorithm: 'brotli',
                 test: /\.(js|css|html|svg)$/,
                 threshold: 10240,
                 minRatio: 0.8
-                }),
-                new BrotliGzipPlugin({
-                    asset: '[path].gz[query]',
-                    algorithm: 'gzip',
-                    test: /\.(js|css|html|svg)$/,
-                    threshold: 10240,
-                    minRatio: 0.8
-                }),
+                })),
+            ...when(production, new BrotliGzipPlugin({
+                asset: '[path].gz[query]',
+                algorithm: 'gzip',
+                test: /\.(js|css|html|svg)$/,
+                threshold: 10240,
+                minRatio: 0.8
+            }))        
         ]
     }]
 };

@@ -1,0 +1,16 @@
+<template>
+  <div slot="main-content">
+      <h1>Counter 2</h1>
+
+      <p>This is a simple example of an Aurelia component with redux.</p>
+
+      <p>Current count: <strong>${state.present.counters.sfcCounter}</strong></p>
+
+      <button click.delegate="incrementCounter()">Increment</button>
+      <button click.delegate="decrementCounter()">Decrement</button>
+      <br>
+      <br>
+      <button click.delegate="undo()">Undo</button>
+      <button click.delegate="redo()">Redo</button>
+  </div>
+</template>
