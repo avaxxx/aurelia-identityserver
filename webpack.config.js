@@ -5,10 +5,16 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const project = require('./aurelia_project/aurelia.json');
+const Visualizer = require('webpack-visualizer-plugin');
 
 const bundleOutputDir = './wwwroot/dist';
 
-module.exports = ({production} = {}) => ({
+// config helpers:
+const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
+const when = (condition, config, negativeConfig) =>
+  condition ? ensureArray(config) : ensureArray(negativeConfig);
+
+module.exports = ({production,displayStatistics} = {}) => ({
         //stats: { modules: true },
         //stats: "detailed",
         entry: { 'app': 'aurelia-bootstrapper' },
@@ -41,7 +47,7 @@ module.exports = ({production} = {}) => ({
             ]
         },
         plugins: [
-            new CheckerPlugin(),            
+            new CheckerPlugin(),         
             new webpack.DefinePlugin({ IS_DEV_BUILD: JSON.stringify(!production) }),
             new webpack.DllReferencePlugin({
                 context: __dirname,
@@ -67,7 +73,10 @@ module.exports = ({production} = {}) => ({
                     // "../../../../ClientApp/resources/locales/en/translation.json",
                     // "../../../../ClientApp/resources/locales/fr/translation.json"
                 ]
-              })
+              }),
+              ...when(displayStatistics,  new Visualizer({
+                filename: './statistics.html'
+              })),
         ].concat(!production ? [
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps

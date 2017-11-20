@@ -19,3 +19,6 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
  ./build.ps1 -configuration Debug -Target Publish
  ./build.ps1 -configuration Release -Target Publish
+
+ # create statistic for webpack
+ au build -display-statistics true

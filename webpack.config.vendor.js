@@ -2,8 +2,14 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('vendor.css');
+const Visualizer = require('webpack-visualizer-plugin');
 
-module.exports = ({ production } = {}) => {
+// config helpers:
+const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
+const when = (condition, config, negativeConfig) =>
+  condition ? ensureArray(config) : ensureArray(negativeConfig);
+
+module.exports = ({ production, displayStatistics } = {}) => {
     const isDevBuild = !production;
     
     return [{
@@ -45,12 +51,18 @@ module.exports = ({ production } = {}) => {
             library: '[name]_[hash]',
         },
         plugins: [
+            // new Visualizer({
+            //     filename: './statistics-vendor.html'
+            //   }),
             extractCSS,
             new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
-            })
+            }),
+            ...when(displayStatistics,  new Visualizer({
+                filename: './statistics-vendor.html'
+              })),
         ].concat(isDevBuild ? [] : [
             new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
         ])

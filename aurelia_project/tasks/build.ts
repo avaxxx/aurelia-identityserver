@@ -10,14 +10,21 @@ import * as del from 'del';
 const buildOptions = new Configuration(project.build.options);
 const production = CLIOptions.getEnvironment() === 'prod';
 // const extractCss = buildOptions.isApplicable('extractCss');
+var gutil = require('gulp-util');
 
+let displayStatistics = false;
+gutil.log('starting!');
+if (CLIOptions.hasFlag('display-statistics'))
+{
+  displayStatistics = CLIOptions.getFlagValue('display-statistics', 'ds');
+}
 const config = webpackConfig({
-  production
+  production, displayStatistics
 });
 const compiler = webpack(<any>config);
 
 const configVendor = webpackVendorConfig({
-  production
+  production, displayStatistics
 });
 const compilerConfig = webpack(<any>configVendor);
 
