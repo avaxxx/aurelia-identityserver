@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('vendor.css');
 const Visualizer = require('webpack-visualizer-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -60,11 +62,24 @@ module.exports = ({ production, displayStatistics } = {}) => {
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
             }),
+            new BrotliGzipPlugin({
+                asset: '[path].br[query]',
+                algorithm: 'brotli',
+                test: /\.(js|css|html|svg)$/,
+                threshold: 10240,
+                minRatio: 0.8
+                }),
+                new BrotliGzipPlugin({
+                    asset: '[path].gz[query]',
+                    algorithm: 'gzip',
+                    test: /\.(js|css|html|svg)$/,
+                    threshold: 10240,
+                    minRatio: 0.8
+                }),
             ...when(displayStatistics,  new Visualizer({
                 filename: './statistics-vendor.html'
               })),
-        ].concat(isDevBuild ? [] : [
-            new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
-        ])
+            ...when(production, new UglifyJsPlugin({ parallel:true })),
+        ]
     }]
 };

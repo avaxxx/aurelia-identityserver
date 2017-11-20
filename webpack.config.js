@@ -6,6 +6,7 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const project = require('./aurelia_project/aurelia.json');
 const Visualizer = require('webpack-visualizer-plugin');
+const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
 
 const bundleOutputDir = './wwwroot/dist';
 
@@ -74,17 +75,28 @@ module.exports = ({production,displayStatistics} = {}) => ({
                     // "../../../../ClientApp/resources/locales/fr/translation.json"
                 ]
               }),
+              new BrotliGzipPlugin({
+                asset: '[path].br[query]',
+                algorithm: 'brotli',
+                test: /\.(js|css|html|svg)$/,
+                threshold: 10240,
+                minRatio: 0.8
+                }),
+                new BrotliGzipPlugin({
+                    asset: '[path].gz[query]',
+                    algorithm: 'gzip',
+                    test: /\.(js|css|html|svg)$/,
+                    threshold: 10240,
+                    minRatio: 0.8
+                }),
               ...when(displayStatistics,  new Visualizer({
                 filename: './statistics.html'
               })),
-        ].concat(!production ? [
-            new webpack.SourceMapDevToolPlugin({
+               ...when(!production, new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]')  // Point sourcemap entries to the original file locations on disk
-            })
-        ] : [
-            new UglifyJsPlugin({
-                parallel: true
-            })
-        ])
+             })),
+              ...when(production, new UglifyJsPlugin({ parallel:true })),
+             
+        ]
 })

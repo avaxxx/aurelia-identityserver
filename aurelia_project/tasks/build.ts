@@ -16,7 +16,7 @@ let displayStatistics = false;
 gutil.log('starting!');
 if (CLIOptions.hasFlag('display-statistics'))
 {
-  displayStatistics = CLIOptions.getFlagValue('display-statistics', 'ds');
+  displayStatistics = CLIOptions.getFlagValue('display-statistics');
 }
 const config = webpackConfig({
   production, displayStatistics

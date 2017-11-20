@@ -26,6 +26,7 @@
     "awesome-typescript-loader": "^3.2.3",
     "bluebird": "^3.5.1",
     "bootstrap": "^3.3.7",
+    "brotli-gzip-webpack-plugin": "^0.5.0",
     "bundle-loader": "^0.5.5",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.1",

@@ -26,6 +26,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using AuAuth.Helpers;
+using CompressedStaticFiles;
 
 namespace WebApplicationBasic
 {
@@ -199,6 +200,7 @@ namespace WebApplicationBasic
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseCompressedStaticFiles();
 
             app.UseStaticFiles();
 
