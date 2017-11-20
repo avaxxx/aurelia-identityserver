@@ -7,12 +7,23 @@
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es2015", "dom" ],
-    "types": [ "node", "@types/kendo-ui", "@types/googlemaps"  ],
+    "types": [ "node", "@types/kendo-ui", "@types/googlemaps" ],
     "jsx": "react",
     "baseUrl": "./ClientApp",
-    "skipLibCheck": true
+    "paths": { // define absolute path mappings
+      "redux": ["typings/redux.d.ts"],
+      "@src/*": ["ClientApp/*"] // will enable -> import { ... } from '@src/components'
+      // in webpack you need to add -> resolve: { alias: { '@src': PATH_TO_SRC } }
+    },
+    "allowSyntheticDefaultImports": true, // no errors on commonjs default import    
+    "allowJs": true, // include js files
+    "pretty": true,
+    "removeComments": true
     // "strictNullChecks": true
   },
+  "include": [
+    "ClientApp/**/*"
+  ],
   "exclude": [ "bin", "node_modules" ]
   // "atom": { "rewriteTsconfig": false }
 }
