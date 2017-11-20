@@ -75,6 +75,14 @@ module.exports = ({production,displayStatistics} = {}) => ({
                     // "../../../../ClientApp/resources/locales/fr/translation.json"
                 ]
               }),
+              ...when(displayStatistics,  new Visualizer({
+                filename: './statistics.html'
+              })),
+               ...when(!production, new webpack.SourceMapDevToolPlugin({
+                filename: '[file].map', // Remove this line if you prefer inline source maps
+                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]')  // Point sourcemap entries to the original file locations on disk
+             })),
+              ...when(production, new UglifyJsPlugin({ parallel:true })),
               new BrotliGzipPlugin({
                 asset: '[path].br[query]',
                 algorithm: 'brotli',
@@ -89,14 +97,5 @@ module.exports = ({production,displayStatistics} = {}) => ({
                     threshold: 10240,
                     minRatio: 0.8
                 }),
-              ...when(displayStatistics,  new Visualizer({
-                filename: './statistics.html'
-              })),
-               ...when(!production, new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]')  // Point sourcemap entries to the original file locations on disk
-             })),
-              ...when(production, new UglifyJsPlugin({ parallel:true })),
-             
         ]
 })
