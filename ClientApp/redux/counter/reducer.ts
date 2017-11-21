@@ -16,10 +16,10 @@ export const reducer = combineReducers<State, RootAction>({
   sfcCounter: (state = 0, action) => {
     switch (action.type) {
       case INCREMENT_SFC:
-        return state + 1;
+        return state + action.value;
 
       case DECREMENT_SFC:
-        return state - 1;
+        return state - action.value;
 
       default:
         return state;

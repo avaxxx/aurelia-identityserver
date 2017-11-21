@@ -22,12 +22,12 @@ public decrementCounter() {
     //this.currentCount++;
 }
 
-// public callServer()
-// {
-//     this.store
-//     .dispatch(fetchValue(20))
-//     .then(() => console.log(this.store.getState()))
-// }
+public callServer()
+{
+    store
+    .dispatch(actionCreators.incrementSfcAsync(10))
+    .then(() => console.log(store.getState()))
+}
 
 public undo()
 {

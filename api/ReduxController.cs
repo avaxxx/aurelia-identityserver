@@ -13,7 +13,7 @@ namespace AuAuth.Api
         public IActionResult Get(int value)
         {
 
-            Thread.Sleep(5000);
+            // Thread.Sleep(5000);
             // return new JsonResult("Test");
             return new JsonResult(new {value = value * 2, isSuccess = true});
         }
