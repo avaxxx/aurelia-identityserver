@@ -4,9 +4,10 @@
 
       <input type="text" ref="inputValue">
       <button click.delegate="add(inputValue.value)">Add</button>
-
+      <button click.delegate="sort()">Sort</button>
+      
       <ul class="todo-list">
-        <li repeat.for="todoItem of state.present.todos.todos">
+        <li repeat.for="todoItem of todos">
 
             <label>${todoItem.title}</label>
           

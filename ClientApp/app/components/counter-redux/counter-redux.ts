@@ -3,13 +3,26 @@ import { StateWithHistory, ActionCreators } from 'redux-undo';
 import { Unsubscribe } from 'redux'
 import store from '../../../redux/store';
 import { RootState } from 'redux/root-reducer';
+import { createSelector } from "reselect";
+import { getSfcCounter } from 'redux/counter/selectors';
+
+const counterState = createSelector(
+    getSfcCounter,
+    (counter) => counter
+  );
 
 export class CounterRedux {    
   state: StateWithHistory<RootState>;
+  counter: number;
   unsubscribe: Unsubscribe;
+
+
+
   
   constructor() {
       this.state = store.getState();
+
+      this.counter = counterState(store.getState().present);
   }
 
   public incrementCounter() {
@@ -42,9 +55,9 @@ public redo()
 
   update()
   {
-      const newState = store.getState();
+      //const newState = store.getState();
       
-      this.state = newState;
+      this.counter = counterState(store.getState().present);
   }
 
   attached() {
