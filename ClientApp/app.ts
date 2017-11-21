@@ -89,6 +89,14 @@ export class App {
             layoutViewModel: PLATFORM.moduleName('main-layout'), 
             title: 'Counter-redux',
         },{
+            route: 'todos',
+            name: 'todos',
+            settings: { icon: 'education' },
+            moduleId: PLATFORM.moduleName('./app/components/todos/todos'),
+            nav: true,
+            layoutViewModel: PLATFORM.moduleName('main-layout'), 
+            title: 'Todos',
+        },{
             route: 'fetch-data',
             name: 'fetchdata',
             settings: { icon: 'th-list',roles: [OpenIdConnectRoles.Administrator] },
