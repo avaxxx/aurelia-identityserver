@@ -12,8 +12,8 @@ export type State = {
   readonly sfcCounter: number,
 };
 
-export const reducer = combineReducers<State>({
-  sfcCounter: (state = 0, action : RootAction) => {
+export const reducer = combineReducers<State, RootAction>({
+  sfcCounter: (state = 0, action) => {
     switch (action.type) {
       case INCREMENT_SFC:
         return state + 1;

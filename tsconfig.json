@@ -11,14 +11,15 @@
     "jsx": "react",
     "baseUrl": "./ClientApp",
     "paths": { // define absolute path mappings
-      "redux": ["typings/redux.d.ts"],
+      "redux": ["../typings/redux.d.ts"],
       "@src/*": ["ClientApp/*"] // will enable -> import { ... } from '@src/components'
       // in webpack you need to add -> resolve: { alias: { '@src': PATH_TO_SRC } }
     },
     "allowSyntheticDefaultImports": true, // no errors on commonjs default import    
     "allowJs": true, // include js files
     "pretty": true,
-    "removeComments": true
+    "removeComments": true,
+    "skipLibCheck": true
     // "strictNullChecks": true
   },
   "include": [

@@ -1,3 +1,4 @@
+import { Action } from './../../../../typings/redux.d';
 import { UserManager } from 'oidc-client'
 import {OpenIdConnect} from 'aurelia-open-id-connect';
 import { autoinject } from "aurelia-framework";
@@ -7,12 +8,12 @@ import thunkMiddleware  from "redux-thunk";
 import enviroment from "../../../environment";
 import * as NProgress from "nprogress";
 import { Reducer } from 'redux';
-import undoable, { ActionCreators } from 'redux-undo';
+import undoable, { ActionCreators, StateWithHistory } from 'redux-undo';
 
 @autoinject
 export class Counter {
-    store: Store<{value}>;
-    state: {value:number};
+    store: Store<StateWithHistory<{}>>;
+    state: any;
     unsubscribe: Unsubscribe;
 
     //  enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
@@ -134,7 +135,15 @@ function requestValue(value = 1) {
     }
   }
 
-const initialState =
+type CounterState = {
+        value: number,
+        isFetching: boolean,
+        receivedAt: number,
+        response: object,
+        status: boolean
+}
+
+const initialState : CounterState =
 {
     value: 0,
     isFetching: false,

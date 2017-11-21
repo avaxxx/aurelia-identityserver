@@ -13,7 +13,7 @@ export interface RootState extends StoreEnhancerState {
 }
 
 
-export const rootReducer = combineReducers<RootState>({
+export const rootReducer = combineReducers<RootState,RootAction>({
   counters,
 //   todos,
 });
