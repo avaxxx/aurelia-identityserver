@@ -13,15 +13,6 @@ export type Actions = {
     type: typeof DECREMENT_SFC,
     value: number
   },
-  INCREMENT_SFC_ASYNC_REQUEST: {
-    type: typeof INCREMENT_SFC_ASYNC_REQUEST,
-    userId: number
-  },
-  INCREMENT_SFC_ASYNC_RESPONSE: {
-    type: typeof INCREMENT_SFC_ASYNC_RESPONSE,
-    value: number
-  },
-  INCREMENT_SFC_ASYNC: any
 };
 
 // Action Creators
@@ -35,13 +26,17 @@ export const actionCreators = {
     value: inputValue
   }),
   incrementSfcAsync: (value = 1) => 
-  dispatch =>{
-    return fetch(`/api/redux?value=${value}`)
-    .then(response => response.json())
-    .then(json => 
-      {
-        console.log(json);
-        dispatch(actionCreators.incrementSfc(json.value));
-      })
+  async dispatch =>{
+    const response = await fetch(`/api/redux?value=${value}`);
+    const json = await response.json();
+
+    dispatch(actionCreators.incrementSfc(json.value));
+
+    // return fetch(`/api/redux?value=${value}`)
+    // .then(response => response.json())
+    // .then(json => 
+    //   {
+    //     dispatch(actionCreators.incrementSfc(json.value));
+    //   })
   }
 };
