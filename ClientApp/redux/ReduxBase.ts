@@ -3,6 +3,7 @@ import { Unsubscribe } from 'redux';
 import store from "./store";
 import {State as UserState} from './user/reducer'
 import { getActiveUser } from "./user/selectors";
+import { RootState } from 'redux/root-reducer';
 export class ReduxBase<T>
 {
     state: T;
@@ -21,7 +22,7 @@ export class ReduxBase<T>
     {
         const newState = store.getState().present;
         this.state = this.selector(newState);     
-        if (newState.user.user !== this.user.user)
+        if ((newState).user.user !== this.user.user)
             this.user = getActiveUser(store.getState().present); 
     }
 

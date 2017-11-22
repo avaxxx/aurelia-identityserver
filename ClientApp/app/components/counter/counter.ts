@@ -1,5 +1,5 @@
+import { UserManager } from 'oidc-client';
 import { Action } from './../../../../typings/redux.d';
-import { UserManager } from 'oidc-client'
 import {OpenIdConnect} from 'aurelia-open-id-connect';
 import { autoinject } from "aurelia-framework";
 import { createStore, Store, Unsubscribe, applyMiddleware, compose } from 'redux'
@@ -9,7 +9,6 @@ import enviroment from "../../../environment";
 import * as NProgress from "nprogress";
 import { Reducer } from 'redux';
 import undoable, { ActionCreators, StateWithHistory } from 'redux-undo';
-
 @autoinject
 export class Counter {
     store: Store<StateWithHistory<{}>>;
@@ -19,7 +18,7 @@ export class Counter {
     //  enhancer = window['devToolsExtension'] ? window['devToolsExtension']()(createStore) : createStore;
      //store: IStore<any> = enhancer(rootReducer, initialState);
 
-    constructor()
+    constructor(private userManager: UserManager)
     {
 
         //this.store = createStore(App,  (<any>window).__REDUX_DEVTOOLS_EXTENSION__ && (<any>window).__REDUX_DEVTOOLS_EXTENSION__());
@@ -67,6 +66,13 @@ export class Counter {
     detached()
     {
         this.unsubscribe();
+    }
+
+    logout()
+    {
+        // this.userManager.signoutRedirect();
+        this.userManager.createSignoutRequest().then((request) => console.log(request));
+        //this.userManager.signoutPopup();
     }
 }
 

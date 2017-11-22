@@ -221,7 +221,19 @@ export class App {
             },
             //route: this.getPath(OpenIdConnectConfiguration.userManagerSettings.redirect_uri),
             route: 'singin-success',
+        },
+        {
+            name: "logOutRedirectCallback",
+            navigationStrategy: (instruction: NavigationInstruction) => {
+                    return this.openIdConnectNavigationStrategies.signoutRedirectCallback(instruction, router);
+            },
+            //route: this.getPath(OpenIdConnectConfiguration.userManagerSettings.redirect_uri),
+            route: 'singout-success',
         }
+
+
+
+        
         // {
         //             name: "callback", nav: false,
         //             navigationStrategy: (instruction: NavigationInstruction) => {

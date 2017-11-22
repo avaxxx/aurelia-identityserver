@@ -107,7 +107,7 @@ namespace AuAuth.IdentityServer
                     AlwaysIncludeUserClaimsInIdToken = true, 
                     AllowOfflineAccess = true,
                     RedirectUris = { $"{IdentityServerUrl}/singin-success" },
-                    PostLogoutRedirectUris = { $"{IdentityServerUrl}/singin-success" },
+                    PostLogoutRedirectUris = { $"{IdentityServerUrl}/singout-success" },
 
                     AllowedScopes =
                     {

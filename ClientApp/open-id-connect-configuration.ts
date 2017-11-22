@@ -25,7 +25,7 @@ export default {
     client_id: "aurelia-openiddict",
     filterProtocolClaims: true,
     loadUserInfo: false,
-    post_logout_redirect_uri: `${appHost}/counter`,
+    post_logout_redirect_uri: `${appHost}/home`,
     redirect_uri: `${appHost}/singin-success`,
     response_type: "token id_token",
     scope: "openid email UserRight api1",

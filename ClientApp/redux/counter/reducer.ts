@@ -1,3 +1,4 @@
+import { LOAD, SAVE } from 'redux-storage';
 import { combineReducers } from 'redux';
 
 import { RootAction } from '../root-action';
@@ -20,6 +21,11 @@ export const reducer = combineReducers<State, RootAction>({
 
       case DECREMENT_SFC:
         return state - action.value;
+
+      // case LOAD:
+      //   return state;
+      case SAVE:
+        console.log('Saving counter state');
 
       default:
         return state;
