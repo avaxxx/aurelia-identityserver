@@ -3,8 +3,9 @@ import { createLogger } from 'redux-logger'
 import thunkMiddleware  from "redux-thunk";
 import { createStore, applyMiddleware, compose } from 'redux';
 import  enviroment  from "../environment";
-import undoable, { ActionCreators, StateWithHistory } from 'redux-undo';
+import undoable, { ActionCreators, StateWithHistory, includeAction, excludeAction } from 'redux-undo';
 import { RootState } from 'redux/root-reducer';
+import { LOGIN, LOGOUT } from "./user/actions";
 
 
 const composeEnhancers = (
@@ -25,7 +26,7 @@ const composeEnhancers = (
       );
       // create store
       return createStore(
-        undoable(rootReducer),
+        undoable(rootReducer, {filter: includeAction([LOGIN, LOGOUT])}),
         initialState!,
         enhancer,
       );

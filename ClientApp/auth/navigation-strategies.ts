@@ -3,7 +3,8 @@ import { NavigationInstruction } from "aurelia-router";
 import { UserManager } from "oidc-client";
 import {OpenIdConnectConfiguration} from "aurelia-open-id-connect";
 import {Router} from 'aurelia-router';
-
+import  store  from "./../redux/store";
+import { actionCreators as UserActionCreators } from "./../redux/user/actions";
 
 @autoinject
 export default class NavigationStrategies {
@@ -30,7 +31,11 @@ export default class NavigationStrategies {
         };
 
         let postCallbackRedirect: Function = () => {
-         router.navigateToRoute('home');
+            this.userManager.getUser().then((user) => {
+                store.dispatch(UserActionCreators.login(user));
+                router.navigateToRoute('home');
+            })
+         
             
             // instruction.config.moduleId = this.openIdConnectConfiguration.loginRedirectModuleId;
         };
@@ -64,7 +69,9 @@ export default class NavigationStrategies {
         };
 
         let postCallbackRedirect: Function = () => {
+            store.dispatch(UserActionCreators.logout());
             router.navigate('home');
+
             // instruction.config.moduleId = this.openIdConnectConfiguration.logoutRedirectModuleId;
         };
 
