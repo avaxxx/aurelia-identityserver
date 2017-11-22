@@ -1,3 +1,4 @@
+import { ReduxBase } from './../../../redux/ReduxBase';
 import { actionCreators } from './../../../redux/counter/actions';
 import { StateWithHistory, ActionCreators } from 'redux-undo';
 import { Unsubscribe } from 'redux'
@@ -11,60 +12,47 @@ const counterState = createSelector(
     (counter) => counter
   );
 
-export class CounterRedux {    
-  state: StateWithHistory<RootState>;
+export class CounterRedux extends ReduxBase<number> {    
+  //state: StateWithHistory<RootState>;
   counter: number;
   unsubscribe: Unsubscribe;
-
-
-
-  
+ 
   constructor() {
-      this.state = store.getState();
+      super(counterState);
+      //this.state = store.getState();
 
-      this.counter = counterState(store.getState().present);
+      //this.counter = counterState(store.getState().present);
   }
 
   public incrementCounter() {
-    store.dispatch(actionCreators.incrementSfc(1));
+    this.dispatch(actionCreators.incrementSfc(1));
     //this.currentCount++;
 }
 
 public decrementCounter() {
-    store.dispatch(actionCreators.decrementSfc(1));
+    this.dispatch(actionCreators.decrementSfc(1));
     //this.currentCount++;
 }
 
 public callServer()
 {
-    store
+    this
     .dispatch(actionCreators.incrementSfcAsync(10))
     .then(() => console.log(store.getState()))
 }
 
-public undo()
-{
-    store.dispatch(ActionCreators.undo())
-}
-
-public redo()
-{
-    store.dispatch(ActionCreators.redo())
-}
-
-
-  update()
-  {
-      //const newState = store.getState();
+//   update()
+//   {
+//       //const newState = store.getState();
       
-      this.counter = counterState(store.getState().present);
-  }
+//       this.counter = counterState(store.getState().present);
+//   }
 
-  attached() {
-    this.unsubscribe = store.subscribe(this.update.bind(this));
-  }
+//   attached() {
+//     this.unsubscribe = store.subscribe(this.update.bind(this));
+//   }
 
-  detached() {
-    this.unsubscribe();
-  }
+//   detached() {
+//     this.unsubscribe();
+//   }
 }
