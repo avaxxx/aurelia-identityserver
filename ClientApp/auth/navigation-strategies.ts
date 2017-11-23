@@ -69,7 +69,8 @@ export default class NavigationStrategies {
         };
 
         let postCallbackRedirect: Function = () => {
-            store.dispatch(UserActionCreators.logout());
+            //store.dispatch(UserActionCreators.logout());
+            localStorage.removeItem('application-state');
             router.navigate('home');
 
             // instruction.config.moduleId = this.openIdConnectConfiguration.logoutRedirectModuleId;
