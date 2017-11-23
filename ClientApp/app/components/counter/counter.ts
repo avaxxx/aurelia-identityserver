@@ -135,7 +135,7 @@ function requestValue(value = 1) {
   function fetchValue(value) {
     return dispatch => {
       dispatch(requestValue(value))
-      return fetch(`/api/redux?value=${value}`)
+      return fetch(`/api/v1/redux?value=${value}`)
         .then(response => response.json())
         .then(json => dispatch(receiveValue(value, json)))
     }

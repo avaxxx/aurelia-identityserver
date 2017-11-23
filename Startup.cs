@@ -152,6 +152,11 @@ namespace WebApplicationBasic
                     options.ApiName = "api1";
 
                 });
+            services.AddApiVersioning( o =>
+            { 
+                o.ReportApiVersions = true; 
+                o.AssumeDefaultVersionWhenUnspecified = true;
+            });
 
             //services.UseCookieAuthentication(new CookieAuthenticationOptions
             //{

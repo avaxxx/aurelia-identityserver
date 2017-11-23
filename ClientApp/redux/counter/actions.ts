@@ -27,7 +27,7 @@ export const actionCreators = {
   }),
   incrementSfcAsync: (value = 1) => 
   async dispatch =>{
-    const response = await fetch(`/api/redux?value=${value}`);
+    const response = await fetch(`/api/v1/redux?value=${value}`);
     const json = await response.json();
 
     dispatch(actionCreators.incrementSfc(json.value));

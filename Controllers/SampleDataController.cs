@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuAuth.Controllers
 {
-    [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    [ApiVersion( "1.0" )]
+    [Route( "api/v{version:apiVersion}/[controller]" )]
+    public class SampleDataController : ControllerBase
     {
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();

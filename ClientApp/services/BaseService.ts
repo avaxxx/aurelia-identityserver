@@ -20,7 +20,7 @@ export class BaseService{
         this.httpClient.configure(config => {
             config
               .useStandardConfiguration()
-              .withBaseUrl('/api/')
+              .withBaseUrl('/api/v1/')
               .withDefaults({
                 credentials: 'same-origin',
                 headers: {

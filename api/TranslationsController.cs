@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AuAuth.Api
  {
-    [Route("api/[controller]")]
+    [ApiVersion( "1.0" )]
+    [Route( "api/v{version:apiVersion}/[controller]" )]
     public class TranslationsController : ControllerBase
     {
         [HttpGet]

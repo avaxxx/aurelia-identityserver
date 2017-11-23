@@ -64,7 +64,7 @@ function boot(aurelia: Aurelia) {
 
         return instance.setup({
             backend:{
-                loadPath: '/api/translations?language={{lng}}'
+                loadPath: '/api/v1/translations?language={{lng}}'
                 // parse: (data) => data,
                 // ajax: loadLocales
             },
