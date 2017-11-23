@@ -21,7 +21,7 @@ const composeEnhancers = (
       
       // const reducer = storage.reducer(rootReducer); 
       const engine = createEngine('application-state');
-      const storageMiddleware = storage.createMiddleware(engine);
+      const storageMiddleware = storage.createMiddleware(engine, [LOGOUT]);
 
       const middlewares = [
           loggerMiddleware,
@@ -37,8 +37,10 @@ const composeEnhancers = (
 
    
       if (localStorage.getItem('application-state') !== null)
+      {
+        console.log('loading state');
         initialState = JSON.parse(localStorage.getItem('application-state'));
-
+      }
       // create store
       return createStore(
         undoable(rootReducer),

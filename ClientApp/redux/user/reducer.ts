@@ -22,8 +22,8 @@ export const reducer = combineReducers<State, RootAction>({
       case LOGIN:
         return {...state, user: action.user, isLoggedIn: true};
       case LOGOUT:
-      localStorage.removeItem('application-state');
-      return {...state, user: null, isLoggedIn: false};
+        localStorage.removeItem('application-state');
+        return null;
       default:
         return state;
     }
