@@ -155,7 +155,8 @@ namespace AuAuth.Controllers
             // delete authentication cookie
             await _signInManager.SignOutAsync();
 
-            return View("LoggedOut", vm);
+            //return View("LoggedOut", vm);
+            return Redirect(vm.PostLogoutRedirectUri);
         }
 
         //
