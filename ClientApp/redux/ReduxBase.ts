@@ -28,7 +28,7 @@ export class ReduxBase<T>
 
     dispatch(action): any
     {
-        store.dispatch(action);
+        return store.dispatch(action);
     }
 
     public undo()

@@ -36,7 +36,7 @@ public decrementCounter() {
 
 public callServer()
 {
-    store
+    this
     .dispatch(actionCreators.incrementSfcAsync(10))
     .then(() => console.log(store.getState()))
 }
