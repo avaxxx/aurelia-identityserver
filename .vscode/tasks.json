@@ -5,7 +5,7 @@
     "tasks": [
         {
             "taskName": "build",
-            "command": "dotnet build",
+            "command": "dotnet build --no-restore",
             "type": "shell",
             "group": "build",
             "presentation": {

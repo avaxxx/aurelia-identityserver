@@ -33,13 +33,6 @@
             }
         },
         {
-            "type": "chrome",
-            "request": "launch",
-            "name": "LaunchChrome",
-            "url": "http://localhost:5000",
-            "webRoot": "${workspaceRoot}/wwwroot/dist"
-        },
-        {
             // This one in case you manually start 2 debug sessions.
             // Like first .net core 
             // then attach to the browser that was started.
@@ -48,12 +41,40 @@
             "name": "AttachChrome",
             "port": 9222,
             "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": ".NET Core Launch (full)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/AuAuth.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+                "enabled": false
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "LaunchChrome",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/wwwroot/dist"
         }
     ],
     "compounds": [
         {
             "name": "Debug All",
-            "configurations": [".NET Core Launch (web)", "LaunchChrome"]
+            "configurations": [".NET Core Launch (full)", "LaunchChrome"]
         }
     ]
 }
